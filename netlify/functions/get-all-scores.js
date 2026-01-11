@@ -38,66 +38,44 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { judgeName, teamName } = event.queryStringParameters || {};
-
-    if (!judgeName || !teamName) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: 'judgeName and teamName are required' }),
-      };
-    }
-
     const sheet = await getScoresSheet();
     
     if (!sheet) {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ exists: false }),
+        body: JSON.stringify({ scores: [] }),
       };
     }
 
     await sheet.loadHeaderRow();
     const rows = await sheet.getRows();
     
-    // Find the most recent score for this judge+team combination
-    let existingScore = null;
-    for (const row of rows) {
-      if (row.get('judge_name') === judgeName && row.get('team_name') === teamName) {
-        existingScore = {
-          idea: row.get('idea') || '',
-          technical: parseInt(row.get('technical'), 10),
-          creativity: parseInt(row.get('creativity'), 10),
-          presentation: parseInt(row.get('presentation'), 10),
-          usefulness: parseInt(row.get('usefulness'), 10),
-          notes: row.get('notes') || '',
-          sponsors_used: row.get('sponsors_used') || '',
-          timestamp: row.get('timestamp'),
-        };
-      }
-    }
-
-    if (existingScore) {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({ exists: true, score: existingScore }),
-      };
-    }
+    // Map all rows to score objects
+    const scores = rows.map(row => ({
+      judge_name: row.get('judge_name') || '',
+      team_name: row.get('team_name') || '',
+      idea: row.get('idea') || '',
+      technical: parseInt(row.get('technical'), 10) || 0,
+      creativity: parseInt(row.get('creativity'), 10) || 0,
+      presentation: parseInt(row.get('presentation'), 10) || 0,
+      usefulness: parseInt(row.get('usefulness'), 10) || 0,
+      total: parseInt(row.get('total'), 10) || 0,
+      timestamp: row.get('timestamp') || '',
+    }));
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ exists: false }),
+      body: JSON.stringify({ scores }),
     };
   } catch (error) {
-    console.error('Error fetching score:', error);
+    console.error('Error fetching all scores:', error);
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({ 
-        error: 'Failed to fetch score',
+        error: 'Failed to fetch scores',
         details: error.message 
       }),
     };

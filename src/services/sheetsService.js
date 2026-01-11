@@ -216,3 +216,28 @@ export async function getExistingScore(judgeName, teamName) {
     return { exists: false };
   }
 }
+
+/**
+ * Get all scores from all judges for rankings
+ * @returns {Promise<{scores: Array}>}
+ */
+export async function getAllScores() {
+  try {
+    const response = await fetch(`${API_BASE}/get-all-scores`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to fetch all scores');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching all scores:', error);
+    throw new Error('Failed to load scores. Please try again.');
+  }
+}

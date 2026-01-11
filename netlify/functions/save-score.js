@@ -22,7 +22,7 @@ async function getScoresSheet() {
     // Create the Scores sheet with headers
     sheet = await doc.addSheet({
       title: 'Scores',
-      headerValues: ['timestamp', 'judge_name', 'team_name', 'technical', 'creativity', 'presentation', 'usefulness', 'total', 'sponsors_used', 'notes']
+      headerValues: ['timestamp', 'judge_name', 'team_name', 'idea', 'technical', 'creativity', 'presentation', 'usefulness', 'total', 'sponsors_used', 'notes']
     });
   }
   
@@ -49,7 +49,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { judgeName, teamName, technical, creativity, presentation, usefulness, notes, sponsors_used } = JSON.parse(event.body);
+    const { judgeName, teamName, idea, technical, creativity, presentation, usefulness, notes, sponsors_used } = JSON.parse(event.body);
 
     // Validate required fields
     if (!judgeName || !teamName) {
@@ -93,6 +93,7 @@ exports.handler = async (event) => {
     if (existingRow) {
       // Update existing row
       existingRow.set('timestamp', timestamp);
+      existingRow.set('idea', idea || '');
       existingRow.set('technical', technical);
       existingRow.set('creativity', creativity);
       existingRow.set('presentation', presentation);
@@ -116,6 +117,7 @@ exports.handler = async (event) => {
         timestamp,
         judge_name: judgeName,
         team_name: teamName,
+        idea: idea || '',
         technical,
         creativity,
         presentation,

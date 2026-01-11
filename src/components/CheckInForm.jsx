@@ -41,10 +41,6 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
       newErrors.teamName = 'Team name is required';
     }
     
-    if (!formData.projectIdea.trim()) {
-      newErrors.projectIdea = 'Project idea is required';
-    }
-    
     if (!formData.foodPreference) {
       newErrors.foodPreference = 'Please select your food preference';
     }
@@ -100,19 +96,18 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
 
           <div className="form-group">
             <label htmlFor="projectIdea">
-              Project Idea <span className="required">*</span>
+              Project Idea (Optional)
             </label>
             <textarea
               id="projectIdea"
               name="projectIdea"
               value={formData.projectIdea}
               onChange={handleChange}
-              placeholder="Briefly describe your project idea..."
+              placeholder="Briefly describe your project idea... (Optional)"
               rows="4"
               disabled={loading}
               className="textarea"
             />
-            {errors.projectIdea && <p className="error-message">{errors.projectIdea}</p>}
           </div>
 
           <div className="form-group">

@@ -1,0 +1,31 @@
+timestamp,judge_name,team_name,technical,creativity,presentation,usefulness,total,sponsors_used,notes,idea
+2026-01-11T10:00:00Z,Alice Chen,Team Alpha,8,9,7,8,32,Cursor,Great execution,AI-powered code review assistant
+2026-01-11T10:05:00Z,Alice Chen,Team Beta,7,8,8,7,30,ElevenLabs,Good voice integration,Voice-controlled smart home dashboard
+2026-01-11T10:10:00Z,Alice Chen,Team Gamma,9,7,6,8,30,Cursor; Runpod,Solid backend,Real-time collaborative whiteboard
+2026-01-11T10:15:00Z,Alice Chen,Team Delta,6,8,7,6,27,,Needs polish,Fitness tracking with AI coach
+2026-01-11T10:20:00Z,Alice Chen,Team Epsilon,8,9,8,9,34,Beyond Presence,Impressive demo,AR navigation for museums
+2026-01-11T10:25:00Z,Alice Chen,Team Zeta,5,6,7,5,23,,Basic implementation,Recipe suggestion app
+2026-01-11T10:30:00Z,Alice Chen,Team Eta,7,7,8,7,29,Cursor,Clean code,Study group matching platform
+2026-01-11T10:35:00Z,Alice Chen,Team Theta,9,8,9,8,34,ElevenLabs; Cursor,Outstanding,Podcast summarizer with AI voices
+2026-01-11T10:40:00Z,Alice Chen,Team Iota,6,7,6,7,26,,Average,Local event discovery app
+2026-01-11T10:45:00Z,Alice Chen,Team Kappa,8,8,7,8,31,Runpod,Good GPU usage,Image generation for marketing
+2026-01-11T14:00:00Z,Bob Martinez,Team Lambda,5,7,6,5,23,Cursor,Creative idea,Code documentation generator
+2026-01-11T14:05:00Z,Bob Martinez,Team Mu,3,3,4,3,13,,Not finished,Weather-based outfit recommender
+2026-01-11T14:10:00Z,Bob Martinez,Team Nu,6,5,5,6,22,Beyond Presence,AR works,Virtual interior design tool
+2026-01-11T14:15:00Z,Bob Martinez,Team Xi,7,7,6,7,27,Cursor; ElevenLabs,Top tier for me,AI meeting assistant with voice
+2026-01-11T14:20:00Z,Bob Martinez,Team Omicron,4,4,5,4,17,,Needs more work,Expense splitting app
+2026-01-11T14:25:00Z,Bob Martinez,Team Pi,5,6,6,5,22,Runpod,ML okay,Plant disease detection
+2026-01-11T14:30:00Z,Bob Martinez,Team Rho,6,5,4,6,21,Cursor,Practical tool,Git commit message generator
+2026-01-11T14:35:00Z,Bob Martinez,Team Sigma,4,6,5,4,19,ElevenLabs,Voice is nice,Language learning companion
+2026-01-11T14:40:00Z,Bob Martinez,Team Tau,5,5,5,5,20,,Middle of pack,Habit tracker with gamification
+2026-01-11T14:45:00Z,Bob Martinez,Team Upsilon,7,6,6,7,26,Cursor; Beyond Presence,Good polish,Remote team collaboration tool
+2026-01-11T18:00:00Z,Carol Wong,Team Phi,6,7,6,6,25,,Good start!,Parking spot finder
+2026-01-11T18:05:00Z,Carol Wong,Team Chi,9,10,10,9,38,ElevenLabs,Amazing pitch!,Audiobook creator from text
+2026-01-11T18:10:00Z,Carol Wong,Team Psi,8,8,7,8,31,Cursor,Nice work!,API testing dashboard
+2026-01-11T18:15:00Z,Carol Wong,Team Omega,9,9,9,9,36,Runpod; Cursor,Great balance!,Video thumbnail generator
+2026-01-11T18:20:00Z,Carol Wong,Team Nexus,7,8,8,7,30,,Good work!,Campus navigation app
+2026-01-11T18:25:00Z,Carol Wong,Team Vertex,10,10,10,10,40,Cursor; ElevenLabs; Beyond Presence,Perfect!,AI debate partner with voice
+2026-01-11T18:30:00Z,Carol Wong,Team Prism,8,9,8,8,33,Runpod,Nice style!,Style transfer for photos
+2026-01-11T18:35:00Z,Carol Wong,Team Quantum,9,9,9,9,36,Cursor,Excellent!,Code refactoring assistant
+2026-01-11T18:40:00Z,Carol Wong,Team Nebula,7,7,7,7,28,,Solid effort!,Mood journaling app
+2026-01-11T18:45:00Z,Carol Wong,Team Cosmos,8,8,9,8,33,Beyond Presence,Great tour!,Virtual museum tours
