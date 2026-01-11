@@ -80,7 +80,7 @@ function InfoPage() {
             </div>
             <div className="meta-item">
               <span className="meta-icon">📅</span>
-              <span>Saturday, January 11, 2025</span>
+              <span>Saturday, January 24, 2026</span>
             </div>
             <div className="meta-item">
               <span className="meta-icon">👥</span>
