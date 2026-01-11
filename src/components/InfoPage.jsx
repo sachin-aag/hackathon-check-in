@@ -7,7 +7,7 @@ const schedule = [
   { time: '10:00', title: 'Hacking Begins', description: 'Start building!' },
   { time: '12:30', title: 'Lunch', description: 'Food break' },
   { time: '16:00', title: 'First Round Judging', description: 'A judge visits each team for a quick pitch' },
-  { time: '17:15', title: 'Top 5 Demos', description: 'Finalists present to all judges' },
+  { time: '17:15', title: 'Top 5 Demos', description: 'Finalists present to all judges and participants' },
   { time: '18:30', title: 'Awards & Closing', description: 'Prize announcements' },
 ];
 
