@@ -1,10 +1,6 @@
-# 🚀 Netlify Functions Setup - COMPLETE!
+# 🚀 Netlify Functions Setup
 
-## ✅ What I've Built
-
-Your app now uses **Netlify Functions** (serverless backend) instead of trying to run Google Sheets in the browser.
-
-### Architecture:
+## ✅ Architecture
 
 ```
 React Frontend (Browser)
@@ -14,31 +10,26 @@ Netlify Functions (Server-side)
 Google Sheets API
 ```
 
-## 📁 New Files Created
+## 📁 Project Structure
 
 ```
 netlify/
 ├── functions/
 │   ├── check-email.js       ← Checks if email is approved
-│   ├── save-data.js          ← Saves form data to Google Sheets
-│   └── package.json          ← Dependencies for functions
+│   ├── save-data.js         ← Saves form data to Google Sheets
+│   └── assign-code.js       ← Assigns cursor credits
 └── netlify.toml              ← Netlify configuration
 ```
 
-## 🔧 Updated Files
-
-- **src/services/sheetsService.js** - Now calls Netlify functions instead of direct Google Sheets
-- **package.json** - Added Netlify CLI for local development
-
 ## 🏃 Running Locally
 
-### 1. Set Your Google Sheet ID
+### 1. Set Your Environment Variables
 
-Edit `.env` file (or rename `.env.configured` to `.env`):
+Create a `.env` file in the project root:
 ```env
-GOOGLE_SHEET_ID=your_actual_sheet_id_here
-GOOGLE_SERVICE_ACCOUNT_EMAIL=cursor-hackathon@cursor-hack-483918.iam.gserviceaccount.com
-GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n..."
+GOOGLE_SHEET_ID=your_sheet_id_here
+GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@your-project.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour_Key_Here\n-----END PRIVATE KEY-----\n"
 ```
 
 ### 2. Start the Development Server
@@ -94,9 +85,9 @@ npx netlify login
 # Initialize site
 npx netlify init
 
-# Set environment variables
+# Set environment variables (use your actual values)
 npx netlify env:set GOOGLE_SHEET_ID "your_sheet_id"
-npx netlify env:set GOOGLE_SERVICE_ACCOUNT_EMAIL "cursor-hackathon@cursor-hack-483918.iam.gserviceaccount.com"
+npx netlify env:set GOOGLE_SERVICE_ACCOUNT_EMAIL "your-service-account@project.iam.gserviceaccount.com"
 npx netlify env:set GOOGLE_PRIVATE_KEY "-----BEGIN PRIVATE KEY-----\nYour_Key_Here\n-----END PRIVATE KEY-----\n"
 
 # Deploy
@@ -105,7 +96,7 @@ npx netlify deploy --prod
 
 ## 🔒 Security Notes
 
-✅ **Your private key is now secure!**
+✅ **Your private key is secure!**
 - It's only in `.env` (which is gitignored)
 - It only runs in Netlify Functions (server-side)
 - **Never exposed to the browser**
@@ -118,36 +109,11 @@ npx netlify deploy --prod
 
 When you deploy, add these in Netlify dashboard:
 
-| Variable | Value |
-|----------|-------|
-| `GOOGLE_SHEET_ID` | Your Sheet ID from URL |
-| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | `cursor-hackathon@cursor-hack-483918.iam.gserviceaccount.com` |
+| Variable | Description |
+|----------|-------------|
+| `GOOGLE_SHEET_ID` | Your Sheet ID from the Google Sheets URL |
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | Service account email from Google Cloud |
 | `GOOGLE_PRIVATE_KEY` | Full private key with `\n` characters |
-
-## 🧪 Testing the Functions
-
-Test the functions directly:
-
-```bash
-# Check email
-curl -X POST http://localhost:8888/.netlify/functions/check-email \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com"}'
-
-# Save data
-curl -X POST http://localhost:8888/.netlify/functions/save-data \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","formData":{"teamName":"Test Team","projectIdea":"Test Idea","dietaryRestrictions":"None","photoConsent":true}}'
-```
-
-## 🎉 You're Ready!
-
-1. ✅ Add your Sheet ID to `.env`
-2. ✅ Run `npm run dev` to test locally
-3. ✅ Push to Git
-4. ✅ Deploy to Netlify
-5. ✅ Add environment variables in Netlify
-6. ✅ Your app is live!
 
 ## 🔍 Troubleshooting
 
@@ -162,10 +128,8 @@ curl -X POST http://localhost:8888/.netlify/functions/save-data \
 
 **Functions not deploying**
 - Make sure `netlify.toml` is in root directory
-- Check `netlify/functions/package.json` exists
-- Verify all dependencies are listed
+- Verify all dependencies are in root `package.json`
 
 ---
 
 **Need help?** Check the Netlify function logs in your dashboard!
-
