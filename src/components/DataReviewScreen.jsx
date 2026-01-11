@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function DataReviewScreen({ data, onEdit, onStartOver }) {
   const handleCopyCode = () => {
     if (data.cursorCode) {
@@ -84,6 +86,10 @@ function DataReviewScreen({ data, onEdit, onStartOver }) {
           >
             Start Over
           </button>
+        </div>
+
+        <div className="event-info-link">
+          <Link to="/">← View Event Info & Schedule</Link>
         </div>
       </div>
     </div>

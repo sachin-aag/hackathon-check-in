@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function EmailScreen({ onEmailSubmit, loading }) {
   const [email, setEmail] = useState('');
@@ -62,6 +63,10 @@ function EmailScreen({ onEmailSubmit, loading }) {
             {loading ? 'Checking...' : 'Continue'}
           </button>
         </form>
+
+        <div className="event-info-link">
+          <Link to="/">← View Event Info & Schedule</Link>
+        </div>
       </div>
     </div>
   );
