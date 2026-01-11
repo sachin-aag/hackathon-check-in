@@ -241,3 +241,87 @@ export async function getAllScores() {
     throw new Error('Failed to load scores. Please try again.');
   }
 }
+
+// ==================== VOTING FUNCTIONS ====================
+
+/**
+ * Get top 6 teams for voting
+ * @returns {Promise<{teams: Array}>}
+ */
+export async function getTopTeams() {
+  try {
+    const response = await fetch(`${API_BASE}/get-top-teams`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to fetch top teams');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching top teams:', error);
+    throw new Error('Failed to load teams. Please try again.');
+  }
+}
+
+/**
+ * Submit a vote for a team
+ * @param {string} email - Voter's email
+ * @param {string} teamVotedFor - Team name being voted for
+ * @returns {Promise<{success: boolean, message: string}>}
+ */
+export async function submitVote(email, teamVotedFor) {
+  try {
+    const response = await fetch(`${API_BASE}/submit-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        email: email.toLowerCase().trim(), 
+        teamVotedFor 
+      }),
+    });
+
+    const result = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to submit vote');
+    }
+
+    return result;
+  } catch (error) {
+    console.error('Error submitting vote:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get final rankings combining judge scores and votes
+ * @returns {Promise<{rankings: Array, totalVotes: number}>}
+ */
+export async function getFinalRankings() {
+  try {
+    const response = await fetch(`${API_BASE}/get-final-rankings`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to fetch final rankings');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching final rankings:', error);
+    throw new Error('Failed to load final rankings. Please try again.');
+  }
+}
