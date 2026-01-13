@@ -112,14 +112,14 @@ const sponsors = {
   ],
   ecosystem: [
     { 
-      name: 'Gamechangerz.io', 
-      url: 'https://gamechangerz.io',
-      logo: '/logos/gamechangerz.png'
+      name: 'Creators', 
+      url: 'https://creators-ecosystem.de/',
+      logo: '/logos/CREATORS-Logo-transparent-e1728380007105.png'
     },
     { 
       name: 'Bildungsinitiative Deutschland', 
       url: 'https://bildungsinitiative-deutschland.de',
-      logo: '/logos/bildungsinitiative.png'
+      logo: '/logos/bildungsinitiative.svg'
     },
   ]
 };
@@ -148,7 +148,7 @@ function InfoPage() {
           <div className="event-meta">
             <div className="meta-item">
               <span className="meta-icon">📍</span>
-              <span>Epplestraße 225/Haus 3, Stuttgart</span>
+              <span>Epplestraße 225/Haus 3, 1st Floor</span>
             </div>
             <div className="meta-item">
               <span className="meta-icon">📅</span>
@@ -376,7 +376,7 @@ function InfoPage() {
 
       {/* Footer */}
       <footer className="info-footer">
-        <p>Cursor Hackathon Stuttgart • Haus 3, Level 1</p>
+        <p>Cursor Hackathon Stuttgart • Epplestraße 225/Haus 3, 1st Floor</p>
       </footer>
     </div>
   );
