@@ -55,21 +55,14 @@ function normalizeAndRankScores(rawScores) {
   }
   
   return Object.entries(normalizedByTeam)
-    .map(([team, data]) => {
-      const latestScore = data.rawScores.sort((a, b) => 
-        new Date(b.timestamp) - new Date(a.timestamp)
-      )[0];
-      
-      return {
-        team_name: team,
-        idea: latestScore?.idea || '',
-        normalizedScore: average(data.zScores)
-      };
-    })
+    .map(([team, data]) => ({
+      team_name: team,
+      normalizedScore: average(data.zScores)
+    }))
     .sort((a, b) => b.normalizedScore - a.normalizedScore);
 }
 
-async function getScoresSheet() {
+async function getDoc() {
   const serviceAccountAuth = new JWT({
     email: SERVICE_ACCOUNT_EMAIL,
     key: PRIVATE_KEY,
@@ -79,7 +72,7 @@ async function getScoresSheet() {
   const doc = new GoogleSpreadsheet(SHEET_ID, serviceAccountAuth);
   await doc.loadInfo();
   
-  return doc.sheetsByTitle['Scores'];
+  return doc;
 }
 
 exports.handler = async (event) => {
@@ -102,9 +95,11 @@ exports.handler = async (event) => {
   }
 
   try {
-    const sheet = await getScoresSheet();
+    const doc = await getDoc();
+    const scoresSheet = doc.sheetsByTitle['Scores'];
+    const participantsSheet = doc.sheetsByTitle['Participants'] || doc.sheetsByTitle['participants'] || doc.sheetsByIndex[0];
     
-    if (!sheet) {
+    if (!scoresSheet) {
       return {
         statusCode: 200,
         headers,
@@ -112,20 +107,47 @@ exports.handler = async (event) => {
       };
     }
 
-    await sheet.loadHeaderRow();
-    const rows = await sheet.getRows();
+    // Load scores
+    await scoresSheet.loadHeaderRow();
+    const scoreRows = await scoresSheet.getRows();
     
-    const scores = rows.map(row => ({
+    const scores = scoreRows.map(row => ({
       judge_name: row.get('judge_name') || '',
       team_name: row.get('team_name') || '',
-      idea: row.get('idea') || '',
       total: parseInt(row.get('total'), 10) || 0,
       timestamp: row.get('timestamp') || '',
     }));
 
-    // Get top 6 teams by normalized score
+    // Get ranked teams by normalized score
     const rankedTeams = normalizeAndRankScores(scores);
-    const top6 = rankedTeams.slice(0, 6);
+    const top6TeamNames = rankedTeams.slice(0, 6).map(t => t.team_name.toLowerCase());
+
+    // Load team descriptions from Participants sheet
+    const teamDescriptions = {};
+    if (participantsSheet) {
+      await participantsSheet.loadHeaderRow();
+      const participantRows = await participantsSheet.getRows();
+      
+      for (const row of participantRows) {
+        const teamName = (row.get('team_name') || '').toLowerCase();
+        const projectIdea = row.get('project_idea') || '';
+        
+        // Only store if team is in top 6 and has a description
+        if (teamName && top6TeamNames.includes(teamName) && projectIdea) {
+          // Use the first non-empty description found for this team
+          if (!teamDescriptions[teamName]) {
+            teamDescriptions[teamName] = projectIdea;
+          }
+        }
+      }
+    }
+
+    // Combine rankings with team descriptions
+    const top6 = rankedTeams.slice(0, 6).map(team => ({
+      team_name: team.team_name,
+      idea: teamDescriptions[team.team_name.toLowerCase()] || '',
+      normalizedScore: team.normalizedScore
+    }));
 
     return {
       statusCode: 200,
@@ -144,4 +166,3 @@ exports.handler = async (event) => {
     };
   }
 };
-

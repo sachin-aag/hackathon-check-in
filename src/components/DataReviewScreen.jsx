@@ -50,6 +50,21 @@ function DataReviewScreen({ data, onEdit, onStartOver, onTeamFormation }) {
             </div>
           )}
 
+          {/* Looking for teammates info */}
+          {data.hasOwnIdea && data.lookingForTeammates && (
+            <div className="data-item">
+              <label className="data-label">Looking for Teammates</label>
+              <p className="data-value">
+                <span className="approach-badge looking-to-join">🔍 Yes, looking for teammates</span>
+              </p>
+              {data.desiredSkills && (
+                <p className="data-value desired-skills">
+                  <strong>Desired skills:</strong> {data.desiredSkills}
+                </p>
+              )}
+            </div>
+          )}
+
           {/* Team Section */}
           <div className="data-section">
             <h3 className="section-title">Team Status</h3>

@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { getApprovedParticipants, saveTeamFormation } from '../services/sheetsService';
 
-function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onBack }) {
+function TeamFormationForm({ currentUserEmail, existingTeamData, onComplete, onBack }) {
   const [formData, setFormData] = useState({
-    teamName: existingTeamName || '',
-    projectIdea: ''
+    teamName: existingTeamData?.teamName || '',
+    projectIdea: existingTeamData?.projectIdea || ''
   });
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [participants, setParticipants] = useState([]);
@@ -14,22 +14,53 @@ function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onB
   const [loadingParticipants, setLoadingParticipants] = useState(true);
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState('');
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
+
+  const isEditMode = !!(existingTeamData?.teamName);
+  const existingTeamName = existingTeamData?.teamName || '';
+
+  // Sync form data with props when they change
+  useEffect(() => {
+    if (existingTeamData) {
+      setFormData({
+        teamName: existingTeamData.teamName || '',
+        projectIdea: existingTeamData.projectIdea || ''
+      });
+    }
+  }, [existingTeamData]);
 
   // Fetch approved participants on mount
   useEffect(() => {
     async function fetchParticipants() {
       try {
         const result = await getApprovedParticipants();
-        setParticipants(result.participants || []);
+        const allParticipants = result.participants || [];
+        setParticipants(allParticipants);
         
-        // Auto-add current user to selected members
-        const currentUser = result.participants?.find(
+        // Find current user
+        const currentUser = allParticipants.find(
           p => p.email.toLowerCase() === currentUserEmail.toLowerCase()
         );
-        if (currentUser) {
-          setSelectedMembers([currentUser]);
+        
+        if (isEditMode && existingTeamName) {
+          // Edit mode: Load all existing team members
+          const existingTeamMembers = allParticipants.filter(
+            p => p.teamName && p.teamName.toLowerCase() === existingTeamName.toLowerCase()
+          );
+          
+          if (existingTeamMembers.length > 0) {
+            setSelectedMembers(existingTeamMembers);
+          } else if (currentUser) {
+            // Fallback: just add current user if no team members found
+            setSelectedMembers([currentUser]);
+          }
+        } else {
+          // New team: just add current user
+          if (currentUser) {
+            setSelectedMembers([currentUser]);
+          }
         }
       } catch (error) {
         console.error('Error fetching participants:', error);
@@ -39,7 +70,7 @@ function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onB
       }
     }
     fetchParticipants();
-  }, [currentUserEmail]);
+  }, [currentUserEmail, isEditMode, existingTeamName]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -58,9 +89,15 @@ function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onB
     if (selectedMembers.some(m => m.email.toLowerCase() === p.email.toLowerCase())) {
       return false;
     }
-    // Exclude participants already in a team
+    // Exclude participants already in a DIFFERENT team (allow same team members to be re-added)
     if (p.teamName && p.teamName.trim() !== '') {
-      return false;
+      // In edit mode, allow members from the same team
+      if (isEditMode && p.teamName.toLowerCase() === existingTeamName.toLowerCase()) {
+        // This person is in the same team, but they're already in selectedMembers
+        // so they won't show up anyway
+      } else {
+        return false;
+      }
     }
     // Filter by search query
     if (searchQuery.trim()) {
@@ -129,9 +166,8 @@ function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onB
     return newErrors;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmitClick = (e) => {
     e.preventDefault();
-    setSubmitError('');
     
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
@@ -139,7 +175,19 @@ function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onB
       return;
     }
 
+    // Show confirmation dialog if user is already in a team
+    if (isEditMode) {
+      setShowConfirmDialog(true);
+    } else {
+      handleConfirmedSubmit();
+    }
+  };
+
+  const handleConfirmedSubmit = async () => {
+    setShowConfirmDialog(false);
+    setSubmitError('');
     setLoading(true);
+    
     try {
       const emails = selectedMembers.map(m => m.email);
       await saveTeamFormation(emails, {
@@ -172,11 +220,24 @@ function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onB
     <div className="screen-container">
       <div className="card">
         <div className="card-header">
-          <h1>👥 Form Your Team</h1>
+          <h1>{isEditMode ? '✏️ Edit Your Team' : '👥 Form Your Team'}</h1>
           <p className="subtitle">
-            Create your team and add members (1-4 participants)
+            {isEditMode 
+              ? 'Update your team details and members'
+              : 'Create your team and add members (1-4 participants)'}
           </p>
         </div>
+
+        {/* Warning banner for edit mode */}
+        {isEditMode && (
+          <div className="warning-banner">
+            <span className="warning-icon">⚠️</span>
+            <div className="warning-content">
+              <strong>You're editing team "{existingTeamName}"</strong>
+              <p>Changes will update the team for all current members. Removed members will no longer be part of this team.</p>
+            </div>
+          </div>
+        )}
 
         {submitError && (
           <div className="error-banner inline-error">
@@ -184,7 +245,7 @@ function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onB
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmitClick} className="form">
           {/* Team Name */}
           <div className="form-group">
             <label htmlFor="teamName">
@@ -315,7 +376,7 @@ function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onB
               className="button button-primary"
               disabled={loading}
             >
-              {loading ? 'Creating Team...' : 'Create Team'}
+              {loading ? 'Saving...' : (isEditMode ? 'Update Team' : 'Create Team')}
             </button>
             <button 
               type="button"
@@ -327,10 +388,45 @@ function TeamFormationForm({ currentUserEmail, existingTeamName, onComplete, onB
             </button>
           </div>
         </form>
+
+        {/* Confirmation Dialog */}
+        {showConfirmDialog && (
+          <div className="confirm-dialog-overlay">
+            <div className="confirm-dialog">
+              <div className="confirm-dialog-header">
+                <span className="confirm-icon">⚠️</span>
+                <h3>Confirm Team Changes</h3>
+              </div>
+              <div className="confirm-dialog-body">
+                <p>You are about to update team <strong>"{formData.teamName}"</strong>.</p>
+                <p>This will:</p>
+                <ul>
+                  <li>Update the team name and project idea for all members</li>
+                  <li>Add new members to this team</li>
+                  <li>Remove members who are no longer selected</li>
+                </ul>
+                <p>Are you sure you want to continue?</p>
+              </div>
+              <div className="confirm-dialog-actions">
+                <button 
+                  className="button button-primary"
+                  onClick={handleConfirmedSubmit}
+                >
+                  Yes, Update Team
+                </button>
+                <button 
+                  className="button button-secondary"
+                  onClick={() => setShowConfirmDialog(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 export default TeamFormationForm;
-

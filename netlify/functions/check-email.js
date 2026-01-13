@@ -97,6 +97,8 @@ exports.handler = async (event) => {
         skills: participantRow.get('skills') || '',
         hasOwnIdea: participantRow.get('has_own_idea') === 'yes',
         initialIdea: participantRow.get('initial_idea') || '',
+        lookingForTeammates: participantRow.get('looking_for_teammates') === 'yes',
+        desiredSkills: participantRow.get('desired_skills') || '',
         timestamp: participantRow.get('checked_in_at') || '',
         cursorCode: participantRow.get('cursor_credit_code') || null
       };

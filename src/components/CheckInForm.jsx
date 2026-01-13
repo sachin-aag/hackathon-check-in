@@ -4,6 +4,8 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
   const [formData, setFormData] = useState({
     hasOwnIdea: true,
     initialIdea: '',
+    lookingForTeammates: false,
+    desiredSkills: '',
     skills: '',
     foodPreference: '',
     foodNotes: '',
@@ -16,6 +18,8 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
       setFormData({
         hasOwnIdea: existingData.hasOwnIdea !== undefined ? existingData.hasOwnIdea : true,
         initialIdea: existingData.initialIdea || '',
+        lookingForTeammates: existingData.lookingForTeammates || false,
+        desiredSkills: existingData.desiredSkills || '',
         skills: existingData.skills || '',
         foodPreference: existingData.foodPreference || '',
         foodNotes: existingData.foodNotes || '',
@@ -136,22 +140,64 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
 
           {/* Initial Idea - Only show if they have their own idea */}
           {formData.hasOwnIdea && (
-            <div className="form-group">
-              <label htmlFor="initialIdea">
-                Describe your idea <span className="required">*</span>
-              </label>
-              <textarea
-                id="initialIdea"
-                name="initialIdea"
-                value={formData.initialIdea}
-                onChange={handleChange}
-                placeholder="What do you want to build? Describe your project idea..."
-                rows="4"
-                disabled={loading}
-                className="textarea"
-              />
-              {errors.initialIdea && <p className="error-message">{errors.initialIdea}</p>}
-            </div>
+            <>
+              <div className="form-group">
+                <label htmlFor="initialIdea">
+                  Describe your idea <span className="required">*</span>
+                </label>
+                <textarea
+                  id="initialIdea"
+                  name="initialIdea"
+                  value={formData.initialIdea}
+                  onChange={handleChange}
+                  placeholder="What do you want to build? Describe your project idea..."
+                  rows="4"
+                  disabled={loading}
+                  className="textarea"
+                />
+                {errors.initialIdea && <p className="error-message">{errors.initialIdea}</p>}
+              </div>
+
+              {/* Looking for Teammates */}
+              <div className="form-group">
+                <div className="checkbox-group teammate-checkbox">
+                  <input
+                    type="checkbox"
+                    id="lookingForTeammates"
+                    name="lookingForTeammates"
+                    checked={formData.lookingForTeammates}
+                    onChange={handleChange}
+                    disabled={loading}
+                    className="checkbox"
+                  />
+                  <label htmlFor="lookingForTeammates" className="checkbox-label">
+                    I'm looking for teammates to help build this idea
+                  </label>
+                </div>
+              </div>
+
+              {/* Desired Skills - Only show if looking for teammates */}
+              {formData.lookingForTeammates && (
+                <div className="form-group">
+                  <label htmlFor="desiredSkills">
+                    What skills are you looking for in teammates?
+                  </label>
+                  <textarea
+                    id="desiredSkills"
+                    name="desiredSkills"
+                    value={formData.desiredSkills}
+                    onChange={handleChange}
+                    placeholder="e.g., Backend developer, UI/UX designer, someone with ML experience... (Optional)"
+                    rows="2"
+                    disabled={loading}
+                    className="textarea"
+                  />
+                  <p className="helper-text">
+                    🔍 This helps others find you if they have the skills you need
+                  </p>
+                </div>
+              )}
+            </>
           )}
 
           {/* Skills Section */}

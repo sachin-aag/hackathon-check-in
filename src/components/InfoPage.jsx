@@ -90,24 +90,24 @@ const sponsors = {
       name: 'Cursor', 
       description: 'All participants get cursor credits for the hackathon',
       url: 'https://cursor.com',
-      logo: 'https://cursor.com/apple-touch-icon.png'
+      logo: '/logos/cursor_logo.png'
     }
   ],
   credit: [
     { 
       name: 'ElevenLabs', 
       url: 'https://elevenlabs.io',
-      logo: '/logos/elevenlabs.png'
+      logo: '/logos/elevenlabs_logo.png'
     },
     { 
       name: 'Beyond Presence', 
       url: 'https://beyondpresence.ai',
-      logo: '/logos/beyond-presence.png'
+      logo: '/logos/beyondpresence_light (2).svg'
     },
     { 
       name: 'Runpod', 
       url: 'https://runpod.io',
-      logo: 'https://www.runpod.io/favicon.ico'
+      logo: '/logos/runpod_logo.svg'
     },
   ],
   ecosystem: [
@@ -351,6 +351,26 @@ function InfoPage() {
           <Link to="/checkin" className="cta-button cta-large">
             Check In Now →
           </Link>
+        </div>
+      </section>
+
+      {/* Quick Links */}
+      <section className="info-section quick-links-section">
+        <div className="section-container">
+          <div className="quick-links">
+            <Link to="/judge" className="quick-link">
+              <span className="quick-link-icon">⚖️</span>
+              <span className="quick-link-text">Judge Portal</span>
+            </Link>
+            <Link to="/vote" className="quick-link">
+              <span className="quick-link-icon">🗳️</span>
+              <span className="quick-link-text">Vote for Teams</span>
+            </Link>
+            <Link to="/rankings" className="quick-link">
+              <span className="quick-link-icon">🏆</span>
+              <span className="quick-link-text">View Rankings</span>
+            </Link>
+          </div>
         </div>
       </section>
 

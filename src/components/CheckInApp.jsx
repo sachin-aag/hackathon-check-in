@@ -117,12 +117,26 @@ function CheckInApp() {
     setCurrentScreen('teamFormation');
   };
 
-  const handleTeamComplete = (teamName) => {
-    // Update existing data with the new team name
-    setExistingData(prev => ({
-      ...prev,
-      teamName: teamName
-    }));
+  const handleTeamComplete = async (teamName) => {
+    // Refresh data from backend to get updated team info
+    try {
+      const result = await checkEmailApproval(participantEmail);
+      if (result.existingData) {
+        setExistingData(result.existingData);
+      } else {
+        // Fallback: just update the team name locally
+        setExistingData(prev => ({
+          ...prev,
+          teamName: teamName
+        }));
+      }
+    } catch (err) {
+      // Fallback: just update the team name locally
+      setExistingData(prev => ({
+        ...prev,
+        teamName: teamName
+      }));
+    }
     setCurrentScreen('review');
   };
 
@@ -181,7 +195,10 @@ function CheckInApp() {
       {currentScreen === 'teamFormation' && (
         <TeamFormationForm 
           currentUserEmail={participantEmail}
-          existingTeamName={existingData?.teamName || ''}
+          existingTeamData={{
+            teamName: existingData?.teamName || '',
+            projectIdea: existingData?.projectIdea || ''
+          }}
           onComplete={handleTeamComplete}
           onBack={handleTeamBack}
         />

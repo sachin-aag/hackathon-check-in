@@ -93,6 +93,12 @@ exports.handler = async (event) => {
       if (formData.initialIdea !== undefined) {
         participantRow.set('initial_idea', formData.initialIdea);
       }
+      if (formData.lookingForTeammates !== undefined) {
+        participantRow.set('looking_for_teammates', formData.lookingForTeammates ? 'yes' : 'no');
+      }
+      if (formData.desiredSkills !== undefined) {
+        participantRow.set('desired_skills', formData.desiredSkills);
+      }
       participantRow.set('checked_in_at', timestamp);
       
       await participantRow.save();
@@ -109,6 +115,8 @@ exports.handler = async (event) => {
         skills: formData.skills || '',
         has_own_idea: formData.hasOwnIdea ? 'yes' : 'no',
         initial_idea: formData.initialIdea || '',
+        looking_for_teammates: formData.lookingForTeammates ? 'yes' : 'no',
+        desired_skills: formData.desiredSkills || '',
         checked_in_at: timestamp
       });
     }

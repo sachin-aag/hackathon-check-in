@@ -35,7 +35,6 @@ function JudgePage() {
   
   // Scoring form
   const [selectedTeam, setSelectedTeam] = useState('');
-  const [idea, setIdea] = useState('');
   const [scores, setScores] = useState({
     technical: 5,
     creativity: 5,
@@ -93,7 +92,6 @@ function JudgePage() {
     } else {
       // Reset to defaults when no team selected
       setIsExistingScore(false);
-      setIdea('');
       setScores({
         technical: 5,
         creativity: 5,
@@ -110,7 +108,6 @@ function JudgePage() {
     try {
       const result = await getExistingScore(judgeName, teamName);
       if (result.exists && result.score) {
-        setIdea(result.score.idea || '');
         setScores({
           technical: result.score.technical,
           creativity: result.score.creativity,
@@ -126,7 +123,6 @@ function JudgePage() {
         setIsExistingScore(true);
       } else {
         // Reset to defaults for new score
-        setIdea('');
         setScores({
           technical: 5,
           creativity: 5,
@@ -240,7 +236,7 @@ function JudgePage() {
       await submitScore({
         judgeName,
         teamName: selectedTeam,
-        idea,
+        idea: '', // Keep empty for backwards compatibility
         ...scores,
         notes,
         sponsors_used: sponsorsUsed.join(', '),
@@ -251,7 +247,6 @@ function JudgePage() {
       
       // Reset form for next team
       setSelectedTeam('');
-      setIdea('');
       setScores({
         technical: 5,
         creativity: 5,
@@ -280,7 +275,6 @@ function JudgePage() {
     setNameInput('');
     setTeams([]);
     setSelectedTeam('');
-    setIdea('');
     setScores({
       technical: 5,
       creativity: 5,
@@ -463,17 +457,6 @@ function JudgePage() {
                   <span>You've already scored this team. Submitting will update your previous score.</span>
                 </div>
               )}
-
-              <div className="form-group">
-                <label htmlFor="idea">Briefly describe the idea</label>
-                <textarea
-                  id="idea"
-                  value={idea}
-                  onChange={(e) => setIdea(e.target.value)}
-                  placeholder="What is this team building? (1-2 sentences)"
-                  rows={2}
-                />
-              </div>
 
               <div className="criteria-section">
                 <div className="criteria-header">
