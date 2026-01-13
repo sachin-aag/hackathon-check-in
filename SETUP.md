@@ -53,3 +53,4 @@ Visit http://localhost:5173 (or the port shown in terminal)
 - **Email not approved**: Verify `approval_status` = "approved" in sheet
 - **Build errors**: Delete `node_modules` and run `npm install` again
 
+

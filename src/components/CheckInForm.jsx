@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 
 function CheckInForm({ email, existingData, onSubmit, loading }) {
   const [formData, setFormData] = useState({
-    teamName: '',
-    projectIdea: '',
+    hasOwnIdea: true,
+    initialIdea: '',
+    skills: '',
     foodPreference: '',
     foodNotes: '',
     photoConsent: false
@@ -13,8 +14,9 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
   useEffect(() => {
     if (existingData) {
       setFormData({
-        teamName: existingData.teamName || '',
-        projectIdea: existingData.projectIdea || '',
+        hasOwnIdea: existingData.hasOwnIdea !== undefined ? existingData.hasOwnIdea : true,
+        initialIdea: existingData.initialIdea || '',
+        skills: existingData.skills || '',
         foodPreference: existingData.foodPreference || '',
         foodNotes: existingData.foodNotes || '',
         photoConsent: existingData.photoConsent || false
@@ -34,11 +36,25 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
     }
   };
 
+  const handleRadioChange = (value) => {
+    setFormData(prev => ({
+      ...prev,
+      hasOwnIdea: value
+    }));
+    if (errors.hasOwnIdea) {
+      setErrors(prev => ({ ...prev, hasOwnIdea: '' }));
+    }
+  };
+
   const validate = () => {
     const newErrors = {};
     
-    if (!formData.teamName.trim()) {
-      newErrors.teamName = 'Team name is required';
+    if (!formData.skills.trim()) {
+      newErrors.skills = 'Please share your skills';
+    }
+    
+    if (formData.hasOwnIdea && !formData.initialIdea.trim()) {
+      newErrors.initialIdea = 'Please describe your idea';
     }
     
     if (!formData.foodPreference) {
@@ -77,39 +93,89 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
         </div>
 
         <form onSubmit={handleSubmit} className="form">
+          {/* Idea Preference Section */}
           <div className="form-group">
-            <label htmlFor="teamName">
-              Team Name <span className="required">*</span>
+            <label className="form-label-main">
+              What brings you to the hackathon? <span className="required">*</span>
             </label>
-            <input
-              type="text"
-              id="teamName"
-              name="teamName"
-              value={formData.teamName}
-              onChange={handleChange}
-              placeholder="Enter your team name"
-              disabled={loading}
-              className="input"
-            />
-            {errors.teamName && <p className="error-message">{errors.teamName}</p>}
+            <div className="radio-group">
+              <label className={`radio-option ${formData.hasOwnIdea ? 'selected' : ''}`}>
+                <input
+                  type="radio"
+                  name="ideaPreference"
+                  checked={formData.hasOwnIdea === true}
+                  onChange={() => handleRadioChange(true)}
+                  disabled={loading}
+                />
+                <div className="radio-content">
+                  <span className="radio-icon">💡</span>
+                  <div>
+                    <strong>I have my own idea</strong>
+                    <p className="radio-description">I want to build something specific and form a team around it</p>
+                  </div>
+                </div>
+              </label>
+              <label className={`radio-option ${formData.hasOwnIdea === false ? 'selected' : ''}`}>
+                <input
+                  type="radio"
+                  name="ideaPreference"
+                  checked={formData.hasOwnIdea === false}
+                  onChange={() => handleRadioChange(false)}
+                  disabled={loading}
+                />
+                <div className="radio-content">
+                  <span className="radio-icon">🤝</span>
+                  <div>
+                    <strong>I'm looking to join a team</strong>
+                    <p className="radio-description">I want to contribute my skills to someone else's project</p>
+                  </div>
+                </div>
+              </label>
+            </div>
           </div>
 
+          {/* Initial Idea - Only show if they have their own idea */}
+          {formData.hasOwnIdea && (
+            <div className="form-group">
+              <label htmlFor="initialIdea">
+                Describe your idea <span className="required">*</span>
+              </label>
+              <textarea
+                id="initialIdea"
+                name="initialIdea"
+                value={formData.initialIdea}
+                onChange={handleChange}
+                placeholder="What do you want to build? Describe your project idea..."
+                rows="4"
+                disabled={loading}
+                className="textarea"
+              />
+              {errors.initialIdea && <p className="error-message">{errors.initialIdea}</p>}
+            </div>
+          )}
+
+          {/* Skills Section */}
           <div className="form-group">
-            <label htmlFor="projectIdea">
-              Project Idea (Optional)
+            <label htmlFor="skills">
+              Share your skills <span className="required">*</span>
             </label>
             <textarea
-              id="projectIdea"
-              name="projectIdea"
-              value={formData.projectIdea}
+              id="skills"
+              name="skills"
+              value={formData.skills}
               onChange={handleChange}
-              placeholder="Briefly describe your project idea... (Optional)"
-              rows="4"
+              placeholder="What skills do you bring? (e.g., Frontend development, UI/UX design, Machine Learning, etc.)"
+              rows="3"
               disabled={loading}
               className="textarea"
             />
+            <p className="helper-text">
+              💡 This helps others understand what you can contribute to a team
+            </p>
+            {errors.skills && <p className="error-message">{errors.skills}</p>}
           </div>
 
+          {/* Food Preference */}
           <div className="form-group">
             <label htmlFor="foodPreference">
               Food Preference <span className="required">*</span>
@@ -130,6 +196,7 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
             {errors.foodPreference && <p className="error-message">{errors.foodPreference}</p>}
           </div>
 
+          {/* Food Notes */}
           <div className="form-group">
             <label htmlFor="foodNotes">
               Food Notes (Allergens, etc.)
@@ -140,12 +207,13 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
               value={formData.foodNotes}
               onChange={handleChange}
               placeholder="Any food allergies or additional dietary requirements? (Optional)"
-              rows="3"
+              rows="2"
               disabled={loading}
               className="textarea"
             />
           </div>
 
+          {/* Photo Consent */}
           <div className="form-group">
             <div className="checkbox-group">
               <input
@@ -169,7 +237,7 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
             className="button button-primary"
             disabled={loading}
           >
-            {loading ? 'Saving...' : (isEditing ? 'Update Information' : 'Submit Check-In')}
+            {loading ? 'Saving...' : (isEditing ? 'Update Information' : 'Complete Check-In')}
           </button>
         </form>
       </div>

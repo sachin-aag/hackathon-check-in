@@ -66,11 +66,33 @@ exports.handler = async (event) => {
     
     if (participantRow) {
       // Update existing row
-      participantRow.set('team_name', formData.teamName.toLowerCase().trim());
-      participantRow.set('project_idea', formData.projectIdea);
-      participantRow.set('food_preference', formData.foodPreference);
-      participantRow.set('food_notes', formData.foodNotes || '');
-      participantRow.set('photo_consent', formData.photoConsent ? 'yes' : 'no');
+      // Only update team fields if provided (for team formation)
+      if (formData.teamName !== undefined) {
+        participantRow.set('team_name', formData.teamName.toLowerCase().trim());
+      }
+      if (formData.projectIdea !== undefined) {
+        participantRow.set('project_idea', formData.projectIdea);
+      }
+      // Check-in fields
+      if (formData.foodPreference !== undefined) {
+        participantRow.set('food_preference', formData.foodPreference);
+      }
+      if (formData.foodNotes !== undefined) {
+        participantRow.set('food_notes', formData.foodNotes || '');
+      }
+      if (formData.photoConsent !== undefined) {
+        participantRow.set('photo_consent', formData.photoConsent ? 'yes' : 'no');
+      }
+      // New check-in fields
+      if (formData.skills !== undefined) {
+        participantRow.set('skills', formData.skills);
+      }
+      if (formData.hasOwnIdea !== undefined) {
+        participantRow.set('has_own_idea', formData.hasOwnIdea ? 'yes' : 'no');
+      }
+      if (formData.initialIdea !== undefined) {
+        participantRow.set('initial_idea', formData.initialIdea);
+      }
       participantRow.set('checked_in_at', timestamp);
       
       await participantRow.save();
@@ -79,11 +101,14 @@ exports.handler = async (event) => {
       await sheet.addRow({
         email: normalizedEmail,
         approval_status: 'approved',
-        team_name: formData.teamName.toLowerCase().trim(),
-        project_idea: formData.projectIdea,
-        food_preference: formData.foodPreference,
+        team_name: formData.teamName ? formData.teamName.toLowerCase().trim() : '',
+        project_idea: formData.projectIdea || '',
+        food_preference: formData.foodPreference || '',
         food_notes: formData.foodNotes || '',
         photo_consent: formData.photoConsent ? 'yes' : 'no',
+        skills: formData.skills || '',
+        has_own_idea: formData.hasOwnIdea ? 'yes' : 'no',
+        initial_idea: formData.initialIdea || '',
         checked_in_at: timestamp
       });
     }

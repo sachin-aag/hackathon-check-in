@@ -158,3 +158,4 @@ email | approval_status | team_name | project_idea | dietary_restrictions | phot
 
 The application is fully functional and ready for your hackathon. Just configure the Google Sheets integration and you're good to go!
 
+

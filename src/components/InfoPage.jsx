@@ -1,4 +1,76 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+// Hackathon start date: January 24, 2026, 9:00 AM CET
+const HACKATHON_START = new Date('2026-01-24T09:00:00+01:00');
+
+// Countdown Timer Component
+function CountdownTimer() {
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  function calculateTimeLeft() {
+    const now = new Date();
+    const difference = HACKATHON_START - now;
+    
+    if (difference <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0, isLive: true };
+    }
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / (1000 * 60)) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+      isLive: false
+    };
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  if (timeLeft.isLive) {
+    return (
+      <div className="countdown-container">
+        <div className="countdown-live">
+          <span className="live-pulse"></span>
+          <span className="live-text">HACKING NOW!</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="countdown-container">
+      <div className="countdown-label">Hackathon starts in</div>
+      <div className="countdown-timer">
+        <div className="countdown-unit">
+          <span className="countdown-value">{String(timeLeft.days).padStart(2, '0')}</span>
+          <span className="countdown-name">Days</span>
+        </div>
+        <span className="countdown-separator">:</span>
+        <div className="countdown-unit">
+          <span className="countdown-value">{String(timeLeft.hours).padStart(2, '0')}</span>
+          <span className="countdown-name">Hours</span>
+        </div>
+        <span className="countdown-separator">:</span>
+        <div className="countdown-unit">
+          <span className="countdown-value">{String(timeLeft.minutes).padStart(2, '0')}</span>
+          <span className="countdown-name">Mins</span>
+        </div>
+        <span className="countdown-separator">:</span>
+        <div className="countdown-unit">
+          <span className="countdown-value">{String(timeLeft.seconds).padStart(2, '0')}</span>
+          <span className="countdown-name">Secs</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 // Schedule data
 const schedule = [
@@ -87,6 +159,7 @@ function InfoPage() {
               <span>Teams of 2-4 people</span>
             </div>
           </div>
+          <CountdownTimer />
           <Link to="/checkin" className="cta-button">
             Check In Now →
           </Link>

@@ -80,9 +80,10 @@ exports.handler = async (event) => {
     const approvalStatus = (participantRow.get('approval_status') || '').toLowerCase();
     const isApproved = approvalStatus === 'approved';
     
-    // Check if they have already filled out the form
-    const hasExistingData = participantRow.get('team_name') && 
-                           participantRow.get('project_idea');
+    // Check if they have already completed check-in (has skills or food preference)
+    const hasExistingData = participantRow.get('checked_in_at') || 
+                           participantRow.get('skills') ||
+                           participantRow.get('food_preference');
     
     let existingData = null;
     if (isApproved && hasExistingData) {
@@ -93,6 +94,9 @@ exports.handler = async (event) => {
         foodPreference: participantRow.get('food_preference') || '',
         foodNotes: participantRow.get('food_notes') || '',
         photoConsent: participantRow.get('photo_consent') === 'yes',
+        skills: participantRow.get('skills') || '',
+        hasOwnIdea: participantRow.get('has_own_idea') === 'yes',
+        initialIdea: participantRow.get('initial_idea') || '',
         timestamp: participantRow.get('checked_in_at') || '',
         cursorCode: participantRow.get('cursor_credit_code') || null
       };

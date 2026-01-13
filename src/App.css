@@ -542,6 +542,141 @@ label {
   font-size: 1.25rem;
 }
 
+/* Countdown Timer */
+.countdown-container {
+  margin: 2rem 0;
+}
+
+.countdown-label {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  min-width: 80px;
+}
+
+.countdown-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  background: linear-gradient(135deg, #ffffff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.countdown-name {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.375rem;
+}
+
+.countdown-separator {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(99, 102, 241, 0.5);
+  margin: 0 0.25rem;
+}
+
+/* Live indicator */
+.countdown-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  border-radius: 50px;
+  padding: 1rem 2rem;
+}
+
+.live-pulse {
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+.live-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #10b981;
+  letter-spacing: 0.05em;
+}
+
+/* Countdown responsive */
+@media (max-width: 640px) {
+  .countdown-unit {
+    min-width: 60px;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .countdown-value {
+    font-size: 1.75rem;
+  }
+
+  .countdown-separator {
+    font-size: 1.5rem;
+    margin: 0 0.125rem;
+  }
+
+  .countdown-name {
+    font-size: 0.625rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .countdown-timer {
+    gap: 0.25rem;
+  }
+
+  .countdown-unit {
+    min-width: 50px;
+    padding: 0.5rem 0.375rem;
+  }
+
+  .countdown-value {
+    font-size: 1.5rem;
+  }
+
+  .countdown-separator {
+    font-size: 1.25rem;
+  }
+}
+
 .cta-button {
   display: inline-block;
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
@@ -2238,5 +2373,341 @@ a.sponsor-card {
   .final-score {
     font-size: 1rem;
     padding: 0.375rem 0.75rem;
+  }
+}
+
+/* ==================== CHECK-IN FORM NEW STYLES ==================== */
+
+/* Radio Group for Idea Preference */
+.form-label-main {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radio-option {
+  display: flex;
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.radio-option:hover .radio-content {
+  border-color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.radio-option.selected .radio-content {
+  border-color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.radio-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.radio-content strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.radio-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin: 0;
+}
+
+/* ==================== TEAM FORMATION STYLES ==================== */
+
+/* Member Count Badge */
+.member-count {
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-left: 0.5rem;
+}
+
+/* Selected Members Chips */
+.selected-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  min-height: 40px;
+}
+
+.member-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.member-email {
+  color: var(--text-primary);
+}
+
+.you-badge {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+.remove-member {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.remove-member:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error-color);
+}
+
+/* Participant Search Dropdown */
+.participant-search {
+  position: relative;
+}
+
+.search-input {
+  padding-right: 2.5rem;
+}
+
+.participant-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 100;
+  margin-top: 0.25rem;
+}
+
+.dropdown-item {
+  padding: 0.875rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.15s ease;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: var(--bg-color);
+}
+
+.participant-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.participant-email {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.participant-name {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.participant-meta {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.375rem;
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.status-badge.checked-in {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+}
+
+.status-badge.not-checked-in {
+  background: rgba(100, 116, 139, 0.1);
+  color: var(--text-secondary);
+}
+
+.status-badge.has-idea {
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--warning-color);
+}
+
+.dropdown-empty {
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Button Accent */
+.button-accent {
+  background: linear-gradient(135deg, var(--primary-color), #8b5cf6);
+  color: white;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.button-accent:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Data Review Section Styles */
+.data-section {
+  background: var(--bg-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.data-section .section-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.data-section .section-title::after {
+  display: none;
+}
+
+.no-team-notice {
+  text-align: center;
+  padding: 1rem;
+}
+
+.no-team-notice p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.team-name-display {
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: capitalize;
+}
+
+/* Approach Badges */
+.approach-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.approach-badge.has-idea {
+  background: rgba(251, 191, 36, 0.1);
+  color: #d97706;
+}
+
+.approach-badge.looking-to-join {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+}
+
+/* Inline Error */
+.inline-error {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive adjustments for new components */
+@media (max-width: 640px) {
+  .radio-content {
+    padding: 1rem;
+  }
+
+  .radio-icon {
+    font-size: 1.5rem;
+  }
+
+  .member-chip {
+    font-size: 0.8125rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .participant-dropdown {
+    max-height: 250px;
   }
 }

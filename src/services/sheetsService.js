@@ -107,6 +107,57 @@ export async function assignCursorCode(email) {
   }
 }
 
+// ==================== TEAM FORMATION FUNCTIONS ====================
+
+/**
+ * Get all approved participants for team formation dropdown
+ * @returns {Promise<{participants: Array, count: number}>}
+ */
+export async function getApprovedParticipants() {
+  try {
+    const response = await fetch(`${API_BASE}/get-approved-participants`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to fetch participants');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching approved participants:', error);
+    throw new Error('Failed to load participants. Please try again.');
+  }
+}
+
+/**
+ * Save team formation data for multiple participants
+ * @param {string[]} emails - Array of participant emails
+ * @param {object} teamData - Team name and project idea
+ * @returns {Promise<boolean>}
+ */
+export async function saveTeamFormation(emails, teamData) {
+  try {
+    // Save team data for each participant
+    const savePromises = emails.map(email => 
+      saveParticipantData(email, {
+        teamName: teamData.teamName,
+        projectIdea: teamData.projectIdea
+      })
+    );
+    
+    await Promise.all(savePromises);
+    return true;
+  } catch (error) {
+    console.error('Error saving team formation:', error);
+    throw new Error('Failed to save team. Please try again.');
+  }
+}
+
 // ==================== JUDGE FUNCTIONS ====================
 
 /**

@@ -5,10 +5,11 @@ import NotApprovedScreen from './NotApprovedScreen';
 import CheckInForm from './CheckInForm';
 import DataReviewScreen from './DataReviewScreen';
 import CursorCreditScreen from './CursorCreditScreen';
+import TeamFormationForm from './TeamFormationForm';
 import { checkEmailApproval, saveParticipantData, assignCursorCode } from '../services/sheetsService';
 
 function CheckInApp() {
-  const [currentScreen, setCurrentScreen] = useState('email'); // email | form | review | notApproved | success | cursorCredit
+  const [currentScreen, setCurrentScreen] = useState('email'); // email | form | review | notApproved | success | cursorCredit | teamFormation
   const [participantEmail, setParticipantEmail] = useState('');
   const [existingData, setExistingData] = useState(null);
   const [cursorCode, setCursorCode] = useState(null);
@@ -112,6 +113,23 @@ function CheckInApp() {
     setCurrentScreen('review');
   };
 
+  const handleTeamFormation = () => {
+    setCurrentScreen('teamFormation');
+  };
+
+  const handleTeamComplete = (teamName) => {
+    // Update existing data with the new team name
+    setExistingData(prev => ({
+      ...prev,
+      teamName: teamName
+    }));
+    setCurrentScreen('review');
+  };
+
+  const handleTeamBack = () => {
+    setCurrentScreen('review');
+  };
+
   return (
     <div className="app">
       {error && (
@@ -148,6 +166,7 @@ function CheckInApp() {
           data={existingData}
           onEdit={handleEdit}
           onStartOver={handleStartOver}
+          onTeamFormation={handleTeamFormation}
         />
       )}
 
@@ -156,6 +175,15 @@ function CheckInApp() {
           code={cursorCode}
           email={participantEmail}
           onContinue={handleCreditContinue}
+        />
+      )}
+
+      {currentScreen === 'teamFormation' && (
+        <TeamFormationForm 
+          currentUserEmail={participantEmail}
+          existingTeamName={existingData?.teamName || ''}
+          onComplete={handleTeamComplete}
+          onBack={handleTeamBack}
         />
       )}
 
@@ -179,4 +207,3 @@ function CheckInApp() {
 }
 
 export default CheckInApp;
-

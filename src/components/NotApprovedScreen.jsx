@@ -30,3 +30,4 @@ function NotApprovedScreen({ onTryAgain }) {
 
 export default NotApprovedScreen;
 
+

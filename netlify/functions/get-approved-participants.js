@@ -5,7 +5,7 @@ const SHEET_ID = process.env.GOOGLE_SHEET_ID;
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
 
-async function getParticipantsSheet() {
+async function getSheet() {
   const serviceAccountAuth = new JWT({
     email: SERVICE_ACCOUNT_EMAIL,
     key: PRIVATE_KEY,
@@ -38,40 +38,43 @@ exports.handler = async (event) => {
   }
 
   try {
-    const sheet = await getParticipantsSheet();
+    const sheet = await getSheet();
     await sheet.loadHeaderRow();
     const rows = await sheet.getRows();
     
-    // Get unique team names (non-empty)
-    const teamNames = new Set();
-    rows.forEach(row => {
-      const teamName = row.get('team_name');
-      if (teamName && teamName.trim()) {
-        teamNames.add(teamName.trim());
-      }
-    });
+    // Get all approved participants
+    const participants = rows
+      .filter(row => {
+        const approvalStatus = (row.get('approval_status') || '').toLowerCase();
+        return approvalStatus === 'approved';
+      })
+      .map(row => ({
+        email: row.get('email') || '',
+        name: row.get('name') || row.get('full_name') || '',
+        teamName: row.get('team_name') || '',
+        hasCheckedIn: !!(row.get('checked_in_at') || row.get('skills')),
+        hasOwnIdea: row.get('has_own_idea') === 'yes',
+        skills: row.get('skills') || ''
+      }));
     
-    // Sort alphabetically
-    const teams = Array.from(teamNames).sort((a, b) => 
-      a.toLowerCase().localeCompare(b.toLowerCase())
-    );
-
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ teams }),
+      body: JSON.stringify({ 
+        participants,
+        count: participants.length
+      }),
     };
   } catch (error) {
-    console.error('Error fetching teams:', error);
+    console.error('Error fetching participants:', error);
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({ 
-        error: 'Failed to fetch teams',
+        error: 'Failed to fetch approved participants',
         details: error.message 
       }),
     };
   }
 };
-
 
