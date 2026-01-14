@@ -9,7 +9,8 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
     skills: '',
     foodPreference: '',
     foodNotes: '',
-    photoConsent: false
+    photoConsent: false,
+    openToOpportunities: false
   });
   const [errors, setErrors] = useState({});
 
@@ -23,7 +24,8 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
         skills: existingData.skills || '',
         foodPreference: existingData.foodPreference || '',
         foodNotes: existingData.foodNotes || '',
-        photoConsent: existingData.photoConsent || false
+        photoConsent: existingData.photoConsent || false,
+        openToOpportunities: existingData.openToOpportunities || false
       });
     }
   }, [existingData]);
@@ -257,6 +259,27 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
               disabled={loading}
               className="textarea"
             />
+          </div>
+
+          {/* Job Opportunities */}
+          <div className="form-group">
+            <div className="checkbox-group">
+              <input
+                type="checkbox"
+                id="openToOpportunities"
+                name="openToOpportunities"
+                checked={formData.openToOpportunities}
+                onChange={handleChange}
+                disabled={loading}
+                className="checkbox"
+              />
+              <label htmlFor="openToOpportunities" className="checkbox-label">
+                💼 I'm open to new job opportunities
+              </label>
+            </div>
+            <p className="helper-text">
+              We may share your profile with our partner companies who are looking for talented individuals like you.
+            </p>
           </div>
 
           {/* Photo Consent */}
