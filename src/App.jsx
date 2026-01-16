@@ -6,6 +6,7 @@ import JudgePage from './components/JudgePage';
 import RankingsPage from './components/RankingsPage';
 import VotePage from './components/VotePage';
 import FinalRankingsPage from './components/FinalRankingsPage';
+import CreditsPage from './components/CreditsPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/rankings" element={<RankingsPage />} />
         <Route path="/vote" element={<VotePage />} />
         <Route path="/final-rankings" element={<FinalRankingsPage />} />
+        <Route path="/credits" element={<CreditsPage />} />
       </Routes>
     </BrowserRouter>
   );

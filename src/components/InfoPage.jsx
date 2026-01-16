@@ -297,6 +297,82 @@ function InfoPage() {
         </div>
       </section>
 
+      {/* How to Get Sponsor Credits Section */}
+      <section className="info-section credits-info-section">
+        <div className="section-container">
+          <h2 className="section-title">How to Get Sponsor Credits</h2>
+          <p className="credits-intro">
+            All participants can claim free credits from our sponsors. Here's how to redeem each one:
+          </p>
+          
+          {/* Top row: Cursor and Runpod */}
+          <div className="credits-info-row credits-info-row-top">
+            {/* Cursor */}
+            <div className="credit-info-card credit-info-highlight">
+              <div className="credit-info-header">
+                <img src="/logos/cursor_logo.png" alt="Cursor" className="credit-info-logo" />
+                <h3>Cursor</h3>
+              </div>
+              <p>Your credits code will be shown after completing check-in.</p>
+              <div className="credit-info-note">
+                <span>⚠️</span> Payment method required on your Cursor account to redeem.
+              </div>
+              <Link to="/checkin" className="credit-info-cta">Check In Now →</Link>
+            </div>
+
+            {/* Runpod */}
+            <div className="credit-info-card">
+              <div className="credit-info-header">
+                <img src="/logos/runpod_logo.svg" alt="Runpod" className="credit-info-logo" />
+                <h3>Runpod</h3>
+              </div>
+              <p>Contact <strong>Tim Pietrusky</strong> at the event to receive your GPU credits.</p>
+              <p className="credit-info-helper">Tim will be available throughout the hackathon!</p>
+            </div>
+          </div>
+
+          {/* Bottom row: ElevenLabs and Beyond Presence */}
+          <div className="credits-info-row credits-info-row-bottom">
+            {/* ElevenLabs */}
+            <div className="credit-info-card">
+              <div className="credit-info-header">
+                <img src="/logos/elevenlabs_logo.png" alt="ElevenLabs" className="credit-info-logo" />
+                <h3>ElevenLabs</h3>
+              </div>
+              <ol className="credit-info-steps">
+                <li>Join Discord & access #🎟️│coupon-codes</li>
+                <li>Click "Start Redemption"</li>
+                <li>Select "Stuttgart Cursor Hackathon"</li>
+                <li>Bot sends your code!</li>
+              </ol>
+              <div className="credit-info-links">
+                <a href="https://discord.com/invite/VnBvbbcdEC" target="_blank" rel="noopener noreferrer">Join Discord</a>
+                <a href="https://youtu.be/S143_JtCtV8" target="_blank" rel="noopener noreferrer">Video Tutorial</a>
+              </div>
+            </div>
+
+            {/* Beyond Presence */}
+            <div className="credit-info-card">
+              <div className="credit-info-header">
+                <img src="/logos/beyondpresence_light (2).svg" alt="Beyond Presence" className="credit-info-logo" />
+                <h3>Beyond Presence</h3>
+              </div>
+              <p>Join their Discord to find the coupon code in the welcome message.</p>
+              <div className="credit-info-links">
+                <a href="https://bey.dev/community" target="_blank" rel="noopener noreferrer">Join Discord</a>
+                <a href="https://bey.chat" target="_blank" rel="noopener noreferrer">Try Demo Agent</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="credits-more-info">
+            <Link to="/credits" className="credits-more-link">
+              View Full Redemption Guide →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Prizes Section */}
       <section className="info-section prizes-section">
         <div className="section-container">
@@ -369,6 +445,10 @@ function InfoPage() {
             <Link to="/rankings" className="quick-link">
               <span className="quick-link-icon">🏆</span>
               <span className="quick-link-text">View Rankings</span>
+            </Link>
+            <Link to="/credits" className="quick-link">
+              <span className="quick-link-icon">🎁</span>
+              <span className="quick-link-text">Sponsor Credits</span>
             </Link>
           </div>
         </div>
