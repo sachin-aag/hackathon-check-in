@@ -1,8 +1,154 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 // Hackathon start date: January 24, 2026, 9:00 AM CET
 const HACKATHON_START = new Date('2026-01-24T09:00:00+01:00');
+const HACKATHON_END = new Date('2026-01-24T18:30:00+01:00');
+
+// Event details for calendar
+const EVENT_DETAILS = {
+  title: 'Cursor Hackathon Stuttgart',
+  location: 'Epplestrasse 225/Haus 3, 1st Floor, Stuttgart',
+  url: 'https://stuttgarthack.netlify.app',
+  description: `Cursor Hackathon Stuttgart - Build something amazing with AI!
+
+Location: Epplestrasse 225/Haus 3, 1st Floor
+
+Schedule:
+- 09:00 Gates Open (Arrival & Registration)
+- 09:30 Kickoff (Welcome & Introduction)
+- 10:00 Hacking Begins (Start building!)
+- 12:30 Lunch (Food break)
+- 16:00 First Round Judging
+- 17:15 Top 5 Demos
+- 18:30 Awards & Closing
+
+More info: https://stuttgarthack.netlify.app`
+};
+
+// Calendar URL generators
+function generateGoogleCalendarUrl() {
+  const formatDate = (date) => date.toISOString().replace(/-|:|\.\d{3}/g, '');
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: EVENT_DETAILS.title,
+    dates: `${formatDate(HACKATHON_START)}/${formatDate(HACKATHON_END)}`,
+    details: EVENT_DETAILS.description,
+    location: EVENT_DETAILS.location,
+    ctz: 'Europe/Berlin'
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+function generateOutlookUrl() {
+  const formatDate = (date) => date.toISOString();
+  const params = new URLSearchParams({
+    path: '/calendar/action/compose',
+    rru: 'addevent',
+    subject: EVENT_DETAILS.title,
+    startdt: formatDate(HACKATHON_START),
+    enddt: formatDate(HACKATHON_END),
+    body: EVENT_DETAILS.description,
+    location: EVENT_DETAILS.location
+  });
+  return `https://outlook.live.com/calendar/0/deeplink/compose?${params.toString()}`;
+}
+
+function generateICSContent() {
+  const formatDate = (date) => date.toISOString().replace(/-|:|\.\d{3}/g, '').slice(0, 15) + 'Z';
+  const escapeText = (text) => text.replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
+  
+  return `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Cursor Hackathon Stuttgart//EN
+BEGIN:VEVENT
+UID:${Date.now()}@stuttgarthack.netlify.app
+DTSTAMP:${formatDate(new Date())}
+DTSTART:${formatDate(HACKATHON_START)}
+DTEND:${formatDate(HACKATHON_END)}
+SUMMARY:${EVENT_DETAILS.title}
+DESCRIPTION:${escapeText(EVENT_DETAILS.description)}
+LOCATION:${EVENT_DETAILS.location}
+URL:${EVENT_DETAILS.url}
+END:VEVENT
+END:VCALENDAR`;
+}
+
+function downloadICS() {
+  const content = generateICSContent();
+  const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'cursor-hackathon-stuttgart.ics';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+// Add to Calendar Component
+function AddToCalendarButton() {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleGoogleCalendar = () => {
+    window.open(generateGoogleCalendarUrl(), '_blank');
+    setIsOpen(false);
+  };
+
+  const handleOutlook = () => {
+    window.open(generateOutlookUrl(), '_blank');
+    setIsOpen(false);
+  };
+
+  const handleDownloadICS = () => {
+    downloadICS();
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="calendar-button-container" ref={dropdownRef}>
+      <button 
+        className="calendar-button"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+      >
+        <span className="calendar-icon">📅</span>
+        <span>Add to Calendar</span>
+        <span className={`calendar-arrow ${isOpen ? 'open' : ''}`}>▾</span>
+      </button>
+      
+      {isOpen && (
+        <div className="calendar-dropdown">
+          <button className="calendar-option" onClick={handleGoogleCalendar}>
+            <span className="option-icon">📆</span>
+            <span>Google Calendar</span>
+          </button>
+          <button className="calendar-option" onClick={handleOutlook}>
+            <span className="option-icon">📧</span>
+            <span>Outlook</span>
+          </button>
+          <button className="calendar-option" onClick={handleDownloadICS}>
+            <span className="option-icon">⬇️</span>
+            <span>Download .ics</span>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 // Countdown Timer Component
 function CountdownTimer() {
@@ -184,6 +330,9 @@ function InfoPage() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="schedule-calendar-action">
+            <AddToCalendarButton />
           </div>
         </div>
       </section>
