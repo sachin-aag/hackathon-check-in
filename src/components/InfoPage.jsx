@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 const HACKATHON_START = new Date('2026-01-24T09:00:00+01:00');
 const HACKATHON_END = new Date('2026-01-24T18:30:00+01:00');
 
+// Discord community invite
+const DISCORD_INVITE_URL = 'https://discord.gg/Z2XXbeXPpn';
+
 // Event details for calendar
 const EVENT_DETAILS = {
   title: 'Cursor Hackathon Stuttgart',
@@ -349,6 +352,15 @@ function InfoPage() {
               className="event-hero-logo"
             />
           </div>
+          
+          <a 
+            href={DISCORD_INVITE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="discord-hero-link"
+          >
+            <span>💬</span> Join our Discord Community
+          </a>
         </div>
       </header>
 
@@ -676,6 +688,39 @@ function InfoPage() {
         </div>
       </section>
 
+      {/* Community Discord Section */}
+      <section className="info-section community-section">
+        <div className="section-container">
+          <h2 className="section-title">Join Our Community</h2>
+          <p className="community-subtitle">
+            Connect with fellow hackers, get support, and stay updated on future events!
+          </p>
+          <div className="community-content">
+            <div className="discord-qr-wrapper">
+              <img 
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(DISCORD_INVITE_URL)}&bgcolor=1a1a3e&color=ffffff`}
+                alt="Discord QR Code"
+                className="discord-qr-code"
+              />
+              <span className="qr-label">Scan to join</span>
+            </div>
+            <div className="discord-info">
+              <h3>CREATORS ECOSYSTEM Discord</h3>
+              <p>Join the CREATORS community to network, share ideas, and collaborate with other builders.</p>
+              <a 
+                href={DISCORD_INVITE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="discord-button"
+              >
+                <span className="discord-icon">💬</span>
+                Join Discord Server
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Quick Links */}
       <section className="info-section quick-links-section">
         <div className="section-container">
@@ -696,6 +741,15 @@ function InfoPage() {
               <span className="quick-link-icon">🎁</span>
               <span className="quick-link-text">Sponsor Credits</span>
             </Link>
+            <a 
+              href={DISCORD_INVITE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="quick-link"
+            >
+              <span className="quick-link-icon">💬</span>
+              <span className="quick-link-text">Join Discord</span>
+            </a>
           </div>
         </div>
       </section>
