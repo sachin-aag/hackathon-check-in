@@ -189,6 +189,7 @@ function CheckInApp() {
           code={cursorCode}
           email={participantEmail}
           onContinue={handleCreditContinue}
+          onTeamFormation={handleTeamFormation}
         />
       )}
 

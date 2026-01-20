@@ -44,6 +44,9 @@ exports.handler = async (event) => {
   try {
     const { email, formData } = JSON.parse(event.body);
     
+    // Debug logging
+    console.log('Received formData:', JSON.stringify(formData, null, 2));
+    
     if (!email || !formData) {
       return {
         statusCode: 400,
@@ -99,6 +102,9 @@ exports.handler = async (event) => {
       if (formData.desiredSkills !== undefined) {
         participantRow.set('desired_skills', formData.desiredSkills);
       }
+      if (formData.openToOpportunities !== undefined) {
+        participantRow.set('open_to_opportunities', formData.openToOpportunities ? 'yes' : 'no');
+      }
       participantRow.set('checked_in_at', timestamp);
       
       await participantRow.save();
@@ -117,6 +123,7 @@ exports.handler = async (event) => {
         initial_idea: formData.initialIdea || '',
         looking_for_teammates: formData.lookingForTeammates ? 'yes' : 'no',
         desired_skills: formData.desiredSkills || '',
+        open_to_opportunities: formData.openToOpportunities ? 'yes' : 'no',
         checked_in_at: timestamp
       });
     }

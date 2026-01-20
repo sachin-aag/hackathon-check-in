@@ -3982,3 +3982,57 @@ a.sponsor-card {
     font-size: 0.8125rem;
   }
 }
+
+/* ==================== REDEMPTION GUIDE LINK ==================== */
+
+.redemption-guide-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.redemption-guide-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* ==================== INFO BANNER ==================== */
+
+.info-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-content strong {
+  display: block;
+  color: var(--primary-color);
+  margin-bottom: 0.25rem;
+}
+
+.info-content p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.4;
+}

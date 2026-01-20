@@ -10,12 +10,18 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
     foodPreference: '',
     foodNotes: '',
     photoConsent: false,
-    openToOpportunities: false
+    openToOpportunities: ''
   });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (existingData) {
+      // Convert boolean openToOpportunities to string for dropdown
+      let opportunitiesValue = '';
+      if (existingData.openToOpportunities !== undefined && existingData.openToOpportunities !== '') {
+        opportunitiesValue = existingData.openToOpportunities ? 'yes' : 'no';
+      }
+      
       setFormData({
         hasOwnIdea: existingData.hasOwnIdea !== undefined ? existingData.hasOwnIdea : true,
         initialIdea: existingData.initialIdea || '',
@@ -25,7 +31,7 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
         foodPreference: existingData.foodPreference || '',
         foodNotes: existingData.foodNotes || '',
         photoConsent: existingData.photoConsent || false,
-        openToOpportunities: existingData.openToOpportunities || false
+        openToOpportunities: opportunitiesValue
       });
     }
   }, [existingData]);
@@ -67,6 +73,10 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
       newErrors.foodPreference = 'Please select your food preference';
     }
     
+    if (!formData.openToOpportunities) {
+      newErrors.openToOpportunities = 'Please select an option';
+    }
+    
     if (!formData.photoConsent) {
       newErrors.photoConsent = 'You must consent to photos to complete check-in';
     }
@@ -83,7 +93,13 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
       return;
     }
 
-    onSubmit(formData);
+    // Convert openToOpportunities from string to boolean for submission
+    const submitData = {
+      ...formData,
+      openToOpportunities: formData.openToOpportunities === 'yes'
+    };
+
+    onSubmit(submitData);
   };
 
   const isEditing = !!existingData;
@@ -263,23 +279,25 @@ function CheckInForm({ email, existingData, onSubmit, loading }) {
 
           {/* Job Opportunities */}
           <div className="form-group">
-            <div className="checkbox-group">
-              <input
-                type="checkbox"
-                id="openToOpportunities"
-                name="openToOpportunities"
-                checked={formData.openToOpportunities}
-                onChange={handleChange}
-                disabled={loading}
-                className="checkbox"
-              />
-              <label htmlFor="openToOpportunities" className="checkbox-label">
-                💼 I'm open to new job opportunities
-              </label>
-            </div>
+            <label htmlFor="openToOpportunities">
+              💼 I'm open to new job opportunities <span className="required">*</span>
+            </label>
+            <select
+              id="openToOpportunities"
+              name="openToOpportunities"
+              value={formData.openToOpportunities}
+              onChange={handleChange}
+              disabled={loading}
+              className="input select"
+            >
+              <option value="">Select an option...</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
             <p className="helper-text">
               We may share your profile with our partner companies who are looking for talented individuals like you.
             </p>
+            {errors.openToOpportunities && <p className="error-message">{errors.openToOpportunities}</p>}
           </div>
 
           {/* Photo Consent */}

@@ -228,6 +228,17 @@ function TeamFormationForm({ currentUserEmail, existingTeamData, onComplete, onB
           </p>
         </div>
 
+        {/* Important note about one registration per team */}
+        {!isEditMode && (
+          <div className="info-banner">
+            <span className="info-icon">ℹ️</span>
+            <div className="info-content">
+              <strong>One registration per team</strong>
+              <p>Only one team member needs to register the team. All selected members will be added automatically.</p>
+            </div>
+          </div>
+        )}
+
         {/* Warning banner for edit mode */}
         {isEditMode && (
           <div className="warning-banner">

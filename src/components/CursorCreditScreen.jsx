@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-function CursorCreditScreen({ code, email, onContinue }) {
+function CursorCreditScreen({ code, email, onContinue, onTeamFormation }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -13,21 +14,6 @@ function CursorCreditScreen({ code, email, onContinue }) {
     const subject = encodeURIComponent('Your Cursor Credit Code');
     const body = encodeURIComponent(`Here's your Cursor credit code: ${code}\n\nEnjoy!`);
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
-  };
-
-  const handleNativeShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Cursor Credit Code',
-          text: `Your Cursor credit code: ${code}`,
-        });
-      } catch (err) {
-        console.error('Error sharing:', err);
-      }
-    } else {
-      handleCopy();
-    }
   };
 
   if (!code) {
@@ -86,21 +72,21 @@ function CursorCreditScreen({ code, email, onContinue }) {
             >
               📧 Email to Myself
             </button>
-
-            {navigator.share && (
-              <button 
-                onClick={handleNativeShare}
-                className="button button-secondary"
-              >
-                📤 Share
-              </button>
-            )}
           </div>
+
+          <Link to="/credits" className="redemption-guide-link">
+            📖 View Credit Redemption Guide
+          </Link>
         </div>
 
-        <button onClick={onContinue} className="button button-primary">
-          Continue to Dashboard
-        </button>
+        <div className="button-group">
+          <button onClick={onContinue} className="button button-primary">
+            Continue to Dashboard
+          </button>
+          <button onClick={onTeamFormation} className="button button-secondary">
+            Continue to Team Formation
+          </button>
+        </div>
 
         <p className="credit-footer">
           This code has been assigned to: <strong>{email}</strong>
