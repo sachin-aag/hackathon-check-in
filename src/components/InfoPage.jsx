@@ -239,6 +239,13 @@ const sponsors = {
       logo: '/logos/cursor_logo.png'
     }
   ],
+  creditFeatured: [
+    { 
+      name: 'Runpod', 
+      url: 'https://runpod.io',
+      logo: '/logos/runpod_logo.svg'
+    },
+  ],
   credit: [
     { 
       name: 'ElevenLabs', 
@@ -251,9 +258,9 @@ const sponsors = {
       logo: '/logos/beyondpresence_light (2).svg'
     },
     { 
-      name: 'Runpod', 
-      url: 'https://runpod.io',
-      logo: '/logos/runpod_logo.svg'
+      name: 'n8n', 
+      url: 'https://n8n.io',
+      logo: '/logos/n8n_full_white_logo.png'
     },
   ],
   ecosystem: [
@@ -283,6 +290,23 @@ const contacts = [
   { name: 'Michael Aechtler', role: 'Host', email: '' },
 ];
 
+// Judges data
+const judges = [
+  { name: 'Michael Aechtler', title: 'CREATORS AI Community Builder', linkedIn: 'https://www.linkedin.com/in/michaelaechtler/' },
+  { name: 'Tim Pietrusky', title: 'RunPod DX, Open-Source Advocate', linkedIn: 'https://www.linkedin.com/in/timpietrusky/' },
+  { name: 'Kasper Hogrefe', title: 'Beyond Presence XR Tech', linkedIn: 'https://www.linkedin.com/in/kasper-hogrefe-6b037a19b/' },
+  { name: 'Michael Baessler', title: 'Bildungsinitiative Education Leader', linkedIn: 'https://www.linkedin.com/in/mbaessler/' },
+  { name: 'Benjamin Pohl', title: 'Developer Tools Specialist', linkedIn: 'https://www.linkedin.com/in/benjamin-p-4a4223177/' },
+];
+
+// Judging criteria
+const judgingCriteria = [
+  { icon: '🛠️', name: 'Technical Execution', description: 'Code quality, functionality, completeness' },
+  { icon: '💡', name: 'Creativity', description: 'Original ideas, novel approach' },
+  { icon: '🎤', name: 'Presentation', description: 'Pitch quality, demo clarity' },
+  { icon: '🎯', name: 'Usefulness', description: 'User insight, real problem, practical impact' },
+];
+
 function InfoPage() {
   return (
     <div className="info-page">
@@ -309,6 +333,14 @@ function InfoPage() {
           <Link to="/checkin" className="cta-button">
             Check In Now →
           </Link>
+          
+          <div className="hero-image-wrapper">
+            <img 
+              src="/logos/cursorhack2.png" 
+              alt="Cursor Hackathon Stuttgart" 
+              className="event-hero-logo"
+            />
+          </div>
         </div>
       </header>
 
@@ -396,6 +428,29 @@ function InfoPage() {
 
           <div className="sponsor-tier">
             <h3 className="tier-label">Credit Sponsors</h3>
+            {/* Featured Credit Sponsor - Runpod on top */}
+            <div className="sponsor-cards credit-tier credit-featured-row">
+              {sponsors.creditFeatured.map((sponsor, index) => (
+                <a 
+                  key={index} 
+                  href={sponsor.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="sponsor-card sponsor-credit sponsor-credit-featured"
+                >
+                  {sponsor.logo && (
+                    <img 
+                      src={sponsor.logo} 
+                      alt={`${sponsor.name} logo`} 
+                      className="sponsor-logo sponsor-logo-credit"
+                      onError={(e) => e.target.style.display = 'none'}
+                    />
+                  )}
+                  <span className="sponsor-name">{sponsor.name}</span>
+                </a>
+              ))}
+            </div>
+            {/* Other Credit Sponsors below */}
             <div className="sponsor-cards credit-tier">
               {sponsors.credit.map((sponsor, index) => (
                 <a 
@@ -454,10 +509,9 @@ function InfoPage() {
             All participants can claim free credits from our sponsors. Here's how to redeem each one:
           </p>
           
-          {/* Top row: Cursor and Runpod */}
-          <div className="credits-info-row credits-info-row-top">
-            {/* Cursor */}
-            <div className="credit-info-card credit-info-highlight">
+          {/* Cursor - Featured on top */}
+          <div className="credits-info-featured">
+            <div className="credit-info-card credit-info-highlight credit-info-wide">
               <div className="credit-info-header">
                 <img src="/logos/cursor_logo.png" alt="Cursor" className="credit-info-logo" />
                 <h3>Cursor</h3>
@@ -468,7 +522,10 @@ function InfoPage() {
               </div>
               <Link to="/checkin" className="credit-info-cta">Check In Now →</Link>
             </div>
+          </div>
 
+          {/* 2x2 Grid: Other sponsors */}
+          <div className="credits-info-grid">
             {/* Runpod */}
             <div className="credit-info-card">
               <div className="credit-info-header">
@@ -478,10 +535,7 @@ function InfoPage() {
               <p>Contact <strong>Tim Pietrusky</strong> at the event to receive your GPU credits.</p>
               <p className="credit-info-helper">Tim will be available throughout the hackathon!</p>
             </div>
-          </div>
 
-          {/* Bottom row: ElevenLabs and Beyond Presence */}
-          <div className="credits-info-row credits-info-row-bottom">
             {/* ElevenLabs */}
             <div className="credit-info-card">
               <div className="credit-info-header">
@@ -512,12 +566,63 @@ function InfoPage() {
                 <a href="https://bey.chat" target="_blank" rel="noopener noreferrer">Try Demo Agent</a>
               </div>
             </div>
+
+            {/* n8n */}
+            <div className="credit-info-card">
+              <div className="credit-info-header">
+                <img src="/logos/n8n_full_white_logo.png" alt="n8n" className="credit-info-logo" />
+                <h3>n8n</h3>
+              </div>
+              <p>Get 1 month of n8n Cloud Pro with our voucher code!</p>
+              <div className="credit-info-code">
+                <code>2026-COMMUNITY-HACKATON-STUTTGART-4BED8C02</code>
+              </div>
+              <div className="credit-info-links">
+                <a href="https://n8n.notion.site/voucher-code" target="_blank" rel="noopener noreferrer">Redeem Voucher</a>
+              </div>
+            </div>
           </div>
 
           <div className="credits-more-info">
             <Link to="/credits" className="credits-more-link">
               View Full Redemption Guide →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Judges & Judging Criteria Section */}
+      <section className="info-section judges-section">
+        <div className="section-container">
+          <h2 className="section-title">Judges</h2>
+          <div className="judges-grid">
+            {judges.map((judge, index) => (
+              <a 
+                key={index} 
+                href={judge.linkedIn}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="judge-card"
+              >
+                <div className="judge-avatar">{judge.name.charAt(0)}</div>
+                <div className="judge-info">
+                  <h3 className="judge-name">{judge.name}</h3>
+                  <p className="judge-title">{judge.title}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <h2 className="section-title criteria-title">Judging Criteria</h2>
+          <p className="criteria-intro">Teams will be evaluated on these four dimensions (1-10 scale each):</p>
+          <div className="criteria-grid">
+            {judgingCriteria.map((criterion, index) => (
+              <div key={index} className="criterion-card">
+                <div className="criterion-icon">{criterion.icon}</div>
+                <h3 className="criterion-name">{criterion.name}</h3>
+                <p className="criterion-desc">{criterion.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

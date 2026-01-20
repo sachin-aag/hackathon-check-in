@@ -64,6 +64,21 @@ const sponsorCredits = [
       { label: 'Join Discord', url: 'https://bey.dev/community' },
       { label: 'Try Demo Agent', url: 'https://bey.chat' }
     ]
+  },
+  {
+    name: 'n8n',
+    logo: '/logos/n8n_full_white_logo.png',
+    icon: '⚡',
+    tagline: 'Workflow automation platform',
+    instructions: [
+      'Visit the n8n voucher redemption page',
+      'Sign in or create an n8n Cloud account',
+      'Enter the voucher code below to redeem 1 month of n8n Cloud Pro'
+    ],
+    note: 'Voucher Code: 2026-COMMUNITY-HACKATON-STUTTGART-4BED8C02',
+    links: [
+      { label: 'Redeem Voucher', url: 'https://n8n.notion.site/voucher-code' }
+    ]
   }
 ];
 

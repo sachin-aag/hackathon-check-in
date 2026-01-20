@@ -500,6 +500,46 @@ label {
   margin: 0 auto;
 }
 
+/* Hero Logo */
+.hero-image-wrapper {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.event-hero-logo {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(99, 102, 241, 0.4));
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.event-hero-logo:hover {
+  transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+  .hero-image-wrapper {
+    margin-top: 2rem;
+  }
+  
+  .event-hero-logo {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-image-wrapper {
+    margin-top: 1.5rem;
+  }
+  
+  .event-hero-logo {
+    max-width: 280px;
+  }
+}
+
 .event-badge {
   display: inline-block;
   background: rgba(99, 102, 241, 0.2);
@@ -1137,6 +1177,14 @@ a.sponsor-card {
 
 .sponsor-credit {
   min-height: 160px;
+}
+
+.credit-featured-row {
+  margin-bottom: 1rem;
+}
+
+.sponsor-credit-featured {
+  min-width: 200px;
 }
 
 .sponsor-ecosystem {
@@ -3206,6 +3254,25 @@ a.sponsor-card {
   flex: 1;
 }
 
+/* Featured sponsor on top */
+.credits-info-featured {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.credit-info-wide {
+  max-width: 500px;
+  width: 100%;
+}
+
+/* 2x2 Grid for other sponsors */
+.credits-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
 .credit-info-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -3329,6 +3396,24 @@ a.sponsor-card {
   margin-top: 0.5rem !important;
 }
 
+.credit-info-code {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px dashed rgba(99, 102, 241, 0.5);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.credit-info-code code {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a5b4fc;
+  letter-spacing: 0.02em;
+  word-break: break-all;
+}
+
 /* QR Codes Inline */
 .qr-codes-inline {
   display: flex;
@@ -3428,6 +3513,14 @@ a.sponsor-card {
 
   .credits-info-row {
     flex-direction: column;
+  }
+
+  .credits-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credit-info-wide {
+    max-width: 100%;
   }
 
   .qr-codes-inline {
@@ -3618,5 +3711,156 @@ a.sponsor-card {
 
   .confirm-dialog-actions {
     flex-direction: column;
+  }
+}
+
+/* ==================== JUDGES SECTION STYLES ==================== */
+
+.judges-section {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.judges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.judge-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.judge-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.judge-avatar {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.judge-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.judges-section .judge-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.judge-title {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+/* Judging Criteria */
+.criteria-title {
+  margin-top: 1rem;
+}
+
+.criteria-intro {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  margin-top: -1.5rem;
+}
+
+.criteria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.criterion-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.criterion-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.12);
+}
+
+.criterion-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.criterion-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.judges-section .criterion-desc {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* Judges responsive */
+@media (max-width: 768px) {
+  .judges-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .criteria-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .criteria-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .judge-card {
+    padding: 1.25rem;
+  }
+
+  .judge-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+
+  .judges-section .judge-name {
+    font-size: 1rem;
+  }
+
+  .judge-title {
+    font-size: 0.8125rem;
   }
 }

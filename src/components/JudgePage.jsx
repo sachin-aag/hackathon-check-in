@@ -9,7 +9,7 @@ const criteria = [
   { id: 'technical', label: 'Technical Execution', description: 'How well-built is the project? Code quality, functionality, completeness.' },
   { id: 'creativity', label: 'Creativity', description: 'Is the idea original and clever? Novel approach or use of technology.' },
   { id: 'presentation', label: 'Presentation', description: 'How well did they pitch it? Clear explanation, demo quality.' },
-  { id: 'usefulness', label: 'Usefulness', description: 'Does it solve a real problem? Practical value and impact.' },
+  { id: 'usefulness', label: 'Usefulness', description: 'Does the team understand their user? Solving a real problem with practical impact.' },
 ];
 
 function JudgePage() {
