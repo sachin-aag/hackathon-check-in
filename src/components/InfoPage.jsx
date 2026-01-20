@@ -21,6 +21,7 @@ Schedule:
 - 09:00 Gates Open (Arrival & Registration)
 - 09:30 Kickoff (Welcome & Introduction)
 - 10:00 Hacking Begins (Start building!)
+- 11:00 Team Registration Deadline (Register your team on the portal)
 - 12:30 Lunch (Food break)
 - 16:00 First Round Judging
 - 17:15 Top 5 Demos
@@ -226,6 +227,7 @@ const schedule = [
   { time: '09:00', title: 'Gates Open', description: 'Arrival & Registration' },
   { time: '09:30', title: 'Kickoff', description: 'Welcome & Introduction' },
   { time: '10:00', title: 'Hacking Begins', description: 'Start building!' },
+  { time: '11:00', title: 'Team Registration Deadline', description: 'Register your team on the portal' },
   { time: '12:30', title: 'Lunch', description: 'Food break' },
   { time: '16:00', title: 'First Round Judging', description: 'A judge visits each team for a quick pitch' },
   { time: '17:15', title: 'Top 5 Demos', description: 'Finalists present to all judges and participants' },
@@ -385,6 +387,35 @@ function InfoPage() {
           </div>
           <div className="schedule-calendar-action">
             <AddToCalendarButton />
+          </div>
+        </div>
+      </section>
+
+      {/* Rules Section */}
+      <section className="info-section">
+        <div className="section-container">
+          <h2 className="section-title">Hackathon Rules</h2>
+          <div className="rules-list">
+            <div className="rule-item">
+              <span className="rule-icon">👥</span>
+              <p>Teams of 2-4 people</p>
+            </div>
+            <div className="rule-item">
+              <span className="rule-icon">💡</span>
+              <p>Build something new</p>
+            </div>
+            <div className="rule-item">
+              <span className="rule-icon">⏰</span>
+              <p>Make sure your team is registered by 11:00 on the portal</p>
+            </div>
+            <div className="rule-item">
+              <span className="rule-icon">📹</span>
+              <p>Highly encouraged to share a repo and video after the hackathon</p>
+            </div>
+            <div className="rule-item">
+              <span className="rule-icon">🚀</span>
+              <p>Most importantly, have fun!</p>
+            </div>
           </div>
         </div>
       </section>

@@ -946,6 +946,44 @@ label {
   padding-top: 0.35rem;
 }
 
+/* Rules Section */
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.rule-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.rule-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(139, 92, 246, 0.3);
+  transform: translateX(5px);
+}
+
+.rule-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.rule-item p {
+  font-size: 1.1rem;
+  color: #e2e8f0;
+  margin: 0;
+  line-height: 1.6;
+}
+
 .schedule-dot {
   width: 14px;
   height: 14px;
