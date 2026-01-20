@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+const N8N_VOUCHER_CODE = '2026-COMMUNITY-HACKATON-STUTTGART-4BED8C02';
 
 // Sponsor credits data
 const sponsorCredits = [
@@ -75,7 +78,7 @@ const sponsorCredits = [
       'Sign in or create an n8n Cloud account',
       'Enter the voucher code below to redeem 1 month of n8n Cloud Pro'
     ],
-    note: 'Voucher Code: 2026-COMMUNITY-HACKATON-STUTTGART-4BED8C02',
+    voucherCode: N8N_VOUCHER_CODE,
     links: [
       { label: 'Redeem Voucher', url: 'https://n8n.notion.site/voucher-code' }
     ]
@@ -83,6 +86,14 @@ const sponsorCredits = [
 ];
 
 function CreditsPage() {
+  const [copiedCode, setCopiedCode] = useState(null);
+
+  const handleCopyVoucher = (code, sponsorName) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCode(sponsorName);
+    setTimeout(() => setCopiedCode(null), 2000);
+  };
+
   return (
     <div className="info-page credits-page">
       {/* Header */}
@@ -132,6 +143,22 @@ function CreditsPage() {
                     <div className="credit-note">
                       <span className="note-icon">ℹ️</span>
                       <span>{sponsor.note}</span>
+                    </div>
+                  )}
+
+                  {sponsor.voucherCode && (
+                    <div className="credit-voucher-section">
+                      <div className="credit-voucher-label">Voucher Code:</div>
+                      <div className="credit-voucher-code">
+                        <code>{sponsor.voucherCode}</code>
+                        <button 
+                          onClick={() => handleCopyVoucher(sponsor.voucherCode, sponsor.name)}
+                          className="copy-voucher-btn"
+                          title="Copy voucher code"
+                        >
+                          {copiedCode === sponsor.name ? '✓ Copied!' : '📋 Copy'}
+                        </button>
+                      </div>
                     </div>
                   )}
 

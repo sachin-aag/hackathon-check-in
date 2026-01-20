@@ -239,14 +239,12 @@ const sponsors = {
       logo: '/logos/cursor_logo.png'
     }
   ],
-  creditFeatured: [
+  credit: [
     { 
       name: 'Runpod', 
       url: 'https://runpod.io',
       logo: '/logos/runpod_logo.svg'
     },
-  ],
-  credit: [
     { 
       name: 'ElevenLabs', 
       url: 'https://elevenlabs.io',
@@ -307,7 +305,17 @@ const judgingCriteria = [
   { icon: '🎯', name: 'Usefulness', description: 'User insight, real problem, practical impact' },
 ];
 
+const N8N_VOUCHER_CODE = '2026-COMMUNITY-HACKATON-STUTTGART-4BED8C02';
+
 function InfoPage() {
+  const [n8nCopied, setN8nCopied] = useState(false);
+
+  const handleCopyN8nCode = () => {
+    navigator.clipboard.writeText(N8N_VOUCHER_CODE);
+    setN8nCopied(true);
+    setTimeout(() => setN8nCopied(false), 2000);
+  };
+
   return (
     <div className="info-page">
       {/* Header */}
@@ -428,30 +436,7 @@ function InfoPage() {
 
           <div className="sponsor-tier">
             <h3 className="tier-label">Credit Sponsors</h3>
-            {/* Featured Credit Sponsor - Runpod on top */}
-            <div className="sponsor-cards credit-tier credit-featured-row">
-              {sponsors.creditFeatured.map((sponsor, index) => (
-                <a 
-                  key={index} 
-                  href={sponsor.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="sponsor-card sponsor-credit sponsor-credit-featured"
-                >
-                  {sponsor.logo && (
-                    <img 
-                      src={sponsor.logo} 
-                      alt={`${sponsor.name} logo`} 
-                      className="sponsor-logo sponsor-logo-credit"
-                      onError={(e) => e.target.style.display = 'none'}
-                    />
-                  )}
-                  <span className="sponsor-name">{sponsor.name}</span>
-                </a>
-              ))}
-            </div>
-            {/* Other Credit Sponsors below */}
-            <div className="sponsor-cards credit-tier">
+            <div className="sponsor-cards credit-tier credit-grid-2x2">
               {sponsors.credit.map((sponsor, index) => (
                 <a 
                   key={index} 
@@ -574,8 +559,15 @@ function InfoPage() {
                 <h3>n8n</h3>
               </div>
               <p>Get 1 month of n8n Cloud Pro with our voucher code!</p>
-              <div className="credit-info-code">
-                <code>2026-COMMUNITY-HACKATON-STUTTGART-4BED8C02</code>
+              <div className="credit-info-code-copyable">
+                <code>{N8N_VOUCHER_CODE}</code>
+                <button 
+                  onClick={handleCopyN8nCode} 
+                  className="copy-voucher-btn"
+                  title="Copy voucher code"
+                >
+                  {n8nCopied ? '✓' : '📋'}
+                </button>
               </div>
               <div className="credit-info-links">
                 <a href="https://n8n.notion.site/voucher-code" target="_blank" rel="noopener noreferrer">Redeem Voucher</a>
