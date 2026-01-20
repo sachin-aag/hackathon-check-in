@@ -3805,10 +3805,16 @@ a.sponsor-card {
 }
 
 .judges-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.25rem;
   margin-bottom: 3rem;
+}
+
+.judges-grid .judge-card {
+  flex: 0 1 280px;
+  max-width: 320px;
 }
 
 .judge-card {
@@ -3917,7 +3923,14 @@ a.sponsor-card {
 /* Judges responsive */
 @media (max-width: 768px) {
   .judges-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .judges-grid .judge-card {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 100%;
   }
 
   .criteria-grid {
