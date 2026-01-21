@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import EmailScreen from './EmailScreen';
 import NotApprovedScreen from './NotApprovedScreen';
@@ -8,13 +8,40 @@ import CursorCreditScreen from './CursorCreditScreen';
 import TeamFormationForm from './TeamFormationForm';
 import { checkEmailApproval, saveParticipantData, assignCursorCode } from '../services/sheetsService';
 
+// Check-in opens on January 24th, 2026 at 8:00 AM CET
+const CHECK_IN_OPEN_DATE = new Date('2026-01-24T08:00:00+01:00');
+
 function CheckInApp() {
+  const [isCheckInOpen, setIsCheckInOpen] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState('');
   const [currentScreen, setCurrentScreen] = useState('email'); // email | form | review | notApproved | success | cursorCredit | teamFormation
   const [participantEmail, setParticipantEmail] = useState('');
   const [existingData, setExistingData] = useState(null);
   const [cursorCode, setCursorCode] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // Check if check-in is open based on current time
+  useEffect(() => {
+    const checkTime = () => {
+      const now = new Date();
+      if (now >= CHECK_IN_OPEN_DATE) {
+        setIsCheckInOpen(true);
+      } else {
+        setIsCheckInOpen(false);
+        // Calculate remaining time for display
+        const diff = CHECK_IN_OPEN_DATE - now;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        setTimeRemaining(`${days}d ${hours}h ${minutes}m`);
+      }
+    };
+    
+    checkTime();
+    const interval = setInterval(checkTime, 60000); // Update every minute
+    return () => clearInterval(interval);
+  }, []);
 
   const handleEmailSubmit = async (email) => {
     setLoading(true);
@@ -143,6 +170,27 @@ function CheckInApp() {
   const handleTeamBack = () => {
     setCurrentScreen('review');
   };
+
+  // Show "Not Yet Open" screen if check-in hasn't opened yet
+  if (!isCheckInOpen) {
+    return (
+      <div className="app">
+        <div className="screen-container">
+          <div className="card">
+            <div className="card-header">
+              <div className="icon-large">⏰</div>
+              <h1>Check-In Not Yet Open</h1>
+              <p className="subtitle">Check-in opens on January 24th at 8:00 AM CET</p>
+              <p className="countdown">Opens in: {timeRemaining}</p>
+            </div>
+          </div>
+        </div>
+        <div className="back-to-info">
+          <Link to="/" className="info-link">← Back to Event Info</Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="app">

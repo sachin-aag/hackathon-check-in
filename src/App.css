@@ -4683,3 +4683,19 @@ a.sponsor-card {
     border-radius: 12px;
   }
 }
+
+/* ==================== CHECK-IN TIME GATE STYLES ==================== */
+
+.countdown {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-top: 1rem;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+}
+
+@media (max-width: 640px) {
+  .countdown {
+    font-size: 1.25rem;
+  }
+}
