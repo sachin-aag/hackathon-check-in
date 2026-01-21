@@ -365,6 +365,24 @@ function InfoPage() {
         </div>
       </header>
 
+      {/* Getting There Teaser */}
+      <section className="info-section location-teaser-section">
+        <div className="section-container">
+          <div className="location-teaser-card">
+            <div className="location-teaser-content">
+              <div className="location-teaser-icon">📍</div>
+              <div className="location-teaser-info">
+                <h3>How to Get There</h3>
+                <p>Bus stop <strong>Sternhäule</strong> is right in front. U-Bahn <strong>Landhaus</strong> is a 7 min walk.</p>
+              </div>
+            </div>
+            <Link to="/getting-there" className="location-teaser-link">
+              View Details →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Schedule Section */}
       <section className="info-section">
         <div className="section-container">
@@ -755,6 +773,10 @@ function InfoPage() {
       <section className="info-section quick-links-section">
         <div className="section-container">
           <div className="quick-links">
+            <Link to="/getting-there" className="quick-link">
+              <span className="quick-link-icon">📍</span>
+              <span className="quick-link-text">Getting There</span>
+            </Link>
             <Link to="/judge" className="quick-link">
               <span className="quick-link-icon">⚖️</span>
               <span className="quick-link-text">Judge Portal</span>

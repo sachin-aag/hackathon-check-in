@@ -4168,3 +4168,518 @@ a.sponsor-card {
   margin: 0;
   line-height: 1.4;
 }
+
+/* ==================== GETTING THERE PAGE STYLES ==================== */
+
+.getting-there-page {
+  min-height: 100vh;
+}
+
+.getting-there-header {
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.15) 0%, transparent 100%);
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.getting-there-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.getting-there-subtitle {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.venue-address-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(99, 102, 241, 0.15);
+  border: 2px solid rgba(99, 102, 241, 0.4);
+  border-radius: 16px;
+  padding: 1.25rem 1.75rem;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.venue-address-box:hover {
+  background: rgba(99, 102, 241, 0.25);
+  border-color: rgba(99, 102, 241, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
+}
+
+.address-icon {
+  font-size: 1.75rem;
+}
+
+.address-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.address-details strong {
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.address-details span {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-top: 0.125rem;
+}
+
+.address-maps-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(99, 102, 241, 0.3);
+  border: 1px solid rgba(99, 102, 241, 0.5);
+  color: #ffffff;
+  padding: 0.5rem 0.875rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.venue-address-box:hover .address-maps-badge {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+/* Transit Options Section */
+.transit-section {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.transit-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.transit-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+}
+
+.transit-card-primary {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.transit-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.transit-info {
+  flex: 1;
+}
+
+.transit-info h3 {
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.transit-distance {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.transit-card-primary .transit-distance {
+  color: #10b981;
+}
+
+.maps-icon-button {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  color: #a5b4fc;
+  padding: 0.5rem 0.875rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.maps-icon-button:hover {
+  background: rgba(99, 102, 241, 0.35);
+  border-color: rgba(99, 102, 241, 0.6);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.maps-icon-emoji {
+  font-size: 1rem;
+}
+
+.maps-icon-text {
+  letter-spacing: 0.02em;
+}
+
+.venue-maps-link {
+  text-align: center;
+}
+
+/* Entrance Section */
+.entrance-section {
+  text-align: center;
+}
+
+.entrance-description {
+  color: #94a3b8;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.entrance-image-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.entrance-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.entrance-caption {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Maps Section */
+.maps-section {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.maps-embed-wrapper {
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.maps-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.maps-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.maps-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(99, 102, 241, 0.4);
+}
+
+.maps-button-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+.maps-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.maps-button-icon {
+  font-size: 1.1rem;
+}
+
+/* Tips Section */
+.tips-section {
+  background: transparent;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.tip-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.tip-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.12);
+}
+
+.tip-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.tip-card h3 {
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.tip-card p {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Contact Help Section */
+.contact-help-section {
+  background: rgba(88, 101, 242, 0.05);
+}
+
+.contact-help-box {
+  background: rgba(88, 101, 242, 0.1);
+  border: 1px solid rgba(88, 101, 242, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.contact-help-box h3 {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+}
+
+.contact-help-box p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 1.25rem 0;
+}
+
+.discord-help-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #5865F2;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.discord-help-button:hover {
+  background: #4752c4;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+}
+
+/* Location Teaser on InfoPage */
+.location-teaser-section {
+  padding: 2rem 1.5rem;
+  background: rgba(99, 102, 241, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.location-teaser-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.location-teaser-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.location-teaser-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.location-teaser-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.location-teaser-info h3 {
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.location-teaser-info p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.location-teaser-link {
+  display: inline-block;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  color: #a5b4fc;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.location-teaser-link:hover {
+  background: rgba(99, 102, 241, 0.25);
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+/* Getting There Responsive */
+@media (max-width: 768px) {
+  .getting-there-title {
+    font-size: 2rem;
+  }
+
+  .venue-address-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .address-details {
+    text-align: center;
+  }
+
+  .transport-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
+  }
+
+  .direction-step {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .step-number {
+    margin: 0 auto;
+  }
+
+  .ubahn-lines {
+    justify-content: center;
+  }
+
+  .maps-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .maps-button {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  .tips-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .location-teaser-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .location-teaser-content {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .getting-there-header {
+    padding: 2rem 1rem;
+  }
+
+  .getting-there-title {
+    font-size: 1.75rem;
+  }
+
+  .direction-step {
+    padding: 1.25rem;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .entrance-image-wrapper {
+    margin: 0 -0.5rem;
+  }
+
+  .entrance-image {
+    border-radius: 12px;
+  }
+}
