@@ -1360,6 +1360,101 @@ a.sponsor-card {
   margin-bottom: 2rem;
 }
 
+/* Community Discord Section */
+.community-section {
+  background: rgba(88, 101, 242, 0.05);
+}
+
+.community-subtitle {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+.community-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.discord-qr-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.discord-qr-code {
+  width: 180px;
+  height: 180px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.qr-label {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.discord-info {
+  text-align: left;
+}
+
+.discord-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.discord-info p {
+  color: #94a3b8;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.discord-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: #5865F2;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.discord-button:hover {
+  background: #4752c4;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+}
+
+.discord-icon {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+  .community-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .discord-info {
+    text-align: center;
+  }
+}
+
 /* Quick Links Section */
 .quick-links-section {
   padding: 2rem 1.5rem;
@@ -3864,16 +3959,17 @@ a.sponsor-card {
 }
 
 .judges-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.25rem;
   margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .judges-grid .judge-card {
-  flex: 0 1 280px;
-  max-width: 320px;
+  width: 100%;
 }
 
 .judge-card {
@@ -3982,14 +4078,12 @@ a.sponsor-card {
 /* Judges responsive */
 @media (max-width: 768px) {
   .judges-grid {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
+    max-width: 100%;
   }
 
   .judges-grid .judge-card {
-    flex: 0 1 auto;
     width: 100%;
-    max-width: 100%;
   }
 
   .criteria-grid {

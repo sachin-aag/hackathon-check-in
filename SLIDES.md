@@ -84,7 +84,7 @@ style: |
 
 - **Cursor** ✨: AI-powered code editor. Check in to receive credits code.
 - **ElevenLabs** 🎙️: AI voice technology. Join Discord for coupon code.
-- **Runpod** 🚀: GPU cloud computing. Find Tim Pietrusky for credits.
+- **Runpod** 🚀: GPU cloud computing. Join Discord #runpod channel for credits.
 - **Beyond Presence** 🤖: AI agents. Join Discord for coupon code.
 - **n8n** ⚡: Workflow automation. 1 month Cloud Pro.
 

@@ -296,10 +296,9 @@ const contacts = [
 // Judges data
 const judges = [
   { name: 'Michael Aechtler', title: 'CREATORS AI Community Builder', linkedIn: 'https://www.linkedin.com/in/michaelaechtler/' },
-  { name: 'Tim Pietrusky', title: 'RunPod DX, Open-Source Advocate', linkedIn: 'https://www.linkedin.com/in/timpietrusky/' },
-  { name: 'Kasper Hogrefe', title: 'Beyond Presence XR Tech', linkedIn: 'https://www.linkedin.com/in/kasper-hogrefe-6b037a19b/' },
-  { name: 'Michael Baessler', title: 'Bildungsinitiative Education Leader', linkedIn: 'https://www.linkedin.com/in/mbaessler/' },
-  { name: 'Benjamin Pohl', title: 'Developer Tools Specialist', linkedIn: 'https://www.linkedin.com/in/benjamin-p-4a4223177/' },
+  { name: 'Kasper Hogrefe', title: 'Founder, Bildungsinitiative', linkedIn: 'https://www.linkedin.com/in/kasper-hogrefe-6b037a19b/' },
+  { name: 'Michael Baessler', title: 'CTO, Theobald Software', linkedIn: 'https://www.linkedin.com/in/mbaessler/' },
+  { name: 'Benjamin Pohl', title: 'Senior Developer, LBBW', linkedIn: 'https://www.linkedin.com/in/benjamin-p-4a4223177/' },
 ];
 
 // Judging criteria
@@ -560,8 +559,8 @@ function InfoPage() {
                 <img src="/logos/runpod_logo.svg" alt="Runpod" className="credit-info-logo" />
                 <h3>Runpod</h3>
               </div>
-              <p>Contact <strong>Tim Pietrusky</strong> at the event to receive your GPU credits.</p>
-              <p className="credit-info-helper">Tim will be available throughout the hackathon!</p>
+              <p>Join Discord and visit the <strong>#runpod</strong> channel to request GPU credits or ask questions.</p>
+              <p className="credit-info-helper">Tim Pietrusky from RunPod will be available remotely on Discord!</p>
             </div>
 
             {/* ElevenLabs */}

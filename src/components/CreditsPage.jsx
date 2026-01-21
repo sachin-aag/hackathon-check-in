@@ -46,11 +46,14 @@ const sponsorCredits = [
     icon: '🚀',
     tagline: 'GPU cloud computing',
     instructions: [
-      'Find Tim Pietrusky at the event',
-      'Introduce yourself and your project idea',
-      'Receive your Runpod credits directly'
+      'Join our Discord server (link below)',
+      'Go to the #runpod channel',
+      'Request credits or ask Tim any GPU-related questions'
     ],
-    note: 'Tim will be available throughout the hackathon to help with GPU-related questions!'
+    note: 'Tim Pietrusky from RunPod is available remotely on Discord to help with credits and questions!',
+    links: [
+      { label: 'Join Discord', url: 'https://discord.gg/Z2XXbeXPpn' }
+    ]
   },
   {
     name: 'Beyond Presence',
