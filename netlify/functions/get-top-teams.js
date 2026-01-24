@@ -118,37 +118,29 @@ exports.handler = async (event) => {
       timestamp: row.get('timestamp') || '',
     }));
 
-    // Get ranked teams by normalized score
+    // HARDCODED: Only these 6 teams should appear for voting
+    const votingTeams = [
+      'hackmybios',
+      'second coffee',
+      'layerzero',
+      'tender ai service',
+      'donotdisturb++',
+      'hibe'
+    ];
+    
+    // Get ranked teams by normalized score (for reference data only)
     const rankedTeams = normalizeAndRankScores(scores);
     
-    // Manual overrides for voting display
-    const excludeFromVoting = ['legend of emilia']; // Teams to exclude (lowercase)
-    const includeInVoting = ['hackmybios']; // Teams to manually include (lowercase)
+    // Create top6Teams from the hardcoded list
+    const top6Teams = votingTeams.map(teamName => {
+      const rankedTeam = rankedTeams.find(t => t.team_name.toLowerCase() === teamName.toLowerCase());
+      return {
+        team_name: teamName,
+        normalizedScore: rankedTeam ? rankedTeam.normalizedScore : 0
+      };
+    });
     
-    // Filter out excluded teams and get top teams
-    const filteredTeams = rankedTeams.filter(t => 
-      !excludeFromVoting.includes(t.team_name.toLowerCase())
-    );
-    
-    // Get top 6 from filtered list
-    let top6Teams = filteredTeams.slice(0, 6);
-    
-    // Check if manually included teams are already in top 6
-    for (const includeName of includeInVoting) {
-      const alreadyIncluded = top6Teams.some(t => t.team_name.toLowerCase() === includeName);
-      if (!alreadyIncluded) {
-        // Find this team in the full ranked list and add it
-        const teamToAdd = rankedTeams.find(t => t.team_name.toLowerCase() === includeName);
-        if (teamToAdd && top6Teams.length >= 6) {
-          // Replace the 6th team with the manually included team
-          top6Teams = [...top6Teams.slice(0, 5), teamToAdd];
-        } else if (teamToAdd) {
-          top6Teams.push(teamToAdd);
-        }
-      }
-    }
-    
-    const top6TeamNames = top6Teams.map(t => t.team_name.toLowerCase());
+    const top6TeamNames = votingTeams.map(t => t.toLowerCase());
 
     // Load team descriptions from Participants sheet
     const teamDescriptions = {};
