@@ -35,9 +35,13 @@ const sponsorCredits = [
       'Fill out the form using your registered email',
       'The bot will send you your unique coupon code'
     ],
+    note: '🚀 Try our latest launches: V3 (next-gen voice AI) and AI Music! Submit your project to the ElevenLabs Showcase for a chance to be featured.',
     links: [
       { label: 'Join Discord', url: 'https://discord.com/invite/VnBvbbcdEC' },
-      { label: 'Video Tutorial', url: 'https://youtu.be/S143_JtCtV8' }
+      { label: 'Video Tutorial', url: 'https://youtu.be/S143_JtCtV8' },
+      { label: 'Try V3', url: 'https://elevenlabs.io/v3' },
+      { label: 'Try AI Music', url: 'https://elevenlabs.io/music' },
+      { label: 'Submit to Showcase', url: 'https://showcase.elevenlabs.io' }
     ]
   },
   {
@@ -67,6 +71,7 @@ const sponsorCredits = [
     ],
     note: 'The coupon code is updated regularly in the Discord welcome message.',
     links: [
+      { label: 'Watch Product Video', url: 'https://www.youtube.com/watch?v=PIokTQBfZCQ' },
       { label: 'Join Discord', url: 'https://bey.dev/community' },
       { label: 'Try Demo Agent', url: 'https://bey.chat' }
     ]

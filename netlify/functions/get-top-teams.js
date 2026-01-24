@@ -120,7 +120,35 @@ exports.handler = async (event) => {
 
     // Get ranked teams by normalized score
     const rankedTeams = normalizeAndRankScores(scores);
-    const top6TeamNames = rankedTeams.slice(0, 6).map(t => t.team_name.toLowerCase());
+    
+    // Manual overrides for voting display
+    const excludeFromVoting = ['legend of emilia']; // Teams to exclude (lowercase)
+    const includeInVoting = ['hackmybios']; // Teams to manually include (lowercase)
+    
+    // Filter out excluded teams and get top teams
+    const filteredTeams = rankedTeams.filter(t => 
+      !excludeFromVoting.includes(t.team_name.toLowerCase())
+    );
+    
+    // Get top 6 from filtered list
+    let top6Teams = filteredTeams.slice(0, 6);
+    
+    // Check if manually included teams are already in top 6
+    for (const includeName of includeInVoting) {
+      const alreadyIncluded = top6Teams.some(t => t.team_name.toLowerCase() === includeName);
+      if (!alreadyIncluded) {
+        // Find this team in the full ranked list and add it
+        const teamToAdd = rankedTeams.find(t => t.team_name.toLowerCase() === includeName);
+        if (teamToAdd && top6Teams.length >= 6) {
+          // Replace the 6th team with the manually included team
+          top6Teams = [...top6Teams.slice(0, 5), teamToAdd];
+        } else if (teamToAdd) {
+          top6Teams.push(teamToAdd);
+        }
+      }
+    }
+    
+    const top6TeamNames = top6Teams.map(t => t.team_name.toLowerCase());
 
     // Load team descriptions from Participants sheet
     const teamDescriptions = {};
@@ -143,7 +171,7 @@ exports.handler = async (event) => {
     }
 
     // Combine rankings with team descriptions
-    const top6 = rankedTeams.slice(0, 6).map(team => ({
+    const top6 = top6Teams.map(team => ({
       team_name: team.team_name,
       idea: teamDescriptions[team.team_name.toLowerCase()] || '',
       normalizedScore: team.normalizedScore

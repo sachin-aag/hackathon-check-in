@@ -41,11 +41,13 @@ style: |
 
 ![bg left:60%](public/logos/cursorhack2.png)
 
-<div style="text-align: center; margin-top: 100px;">
+<div style="text-align: center; margin-top: 80px;">
 
 ### Scan to Check In
 
-![h:450](qrcodes/qrcode_stuttgarthack.netlify.app.png)
+![h:350](qrcodes/qrcode_stuttgarthack.netlify.app.png)
+
+**📶 WiFi:** CREATORS / **Password:** Creators
 
 </div>
 
@@ -84,7 +86,7 @@ style: |
 
 - **Cursor** ✨: AI-powered code editor. Check in to receive credits code.
 - **ElevenLabs** 🎙️: AI voice technology. Join Discord for coupon code.
-- **Runpod** 🚀: GPU cloud computing. Join Discord #runpod channel for credits.
+- **Runpod** 🚀: GPU cloud computing. Redeem $25 credits at credits.getrunpod.io
 - **Beyond Presence** 🤖: AI agents. Join Discord for coupon code.
 - **n8n** ⚡: Workflow automation. 1 month Cloud Pro.
 
@@ -98,6 +100,34 @@ style: |
 </td>
 </tr>
 </table>
+
+---
+
+# 🚀 Runpod Demo
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 70%; gap: 30px;">
+
+<a href="https://drive.google.com/file/d/1KNUuq3mcH2pzVCluhDlD4xevYNNwPT6_/view" target="_blank" style="display: inline-block; padding: 20px 60px; background: linear-gradient(135deg, #673ab7, #512da8); color: white; text-decoration: none; border-radius: 12px; font-size: 28px; font-weight: bold;">
+▶️ Play Video
+</a>
+
+<p style="font-size: 24px; opacity: 0.7;">Click to open video in Google Drive</p>
+
+</div>
+
+---
+
+# 🤖 Beyond Presence Demo
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 70%; gap: 30px;">
+
+<a href="https://www.youtube.com/watch?v=PIokTQBfZCQ" target="_blank" style="display: inline-block; padding: 20px 60px; background: linear-gradient(135deg, #ff0000, #cc0000); color: white; text-decoration: none; border-radius: 12px; font-size: 28px; font-weight: bold;">
+▶️ Play Video
+</a>
+
+<p style="font-size: 24px; opacity: 0.7;">Click to open video in YouTube</p>
+
+</div>
 
 ---
 
@@ -119,20 +149,31 @@ Teams will be judged on a scale of 1-10 for each category:
 
 ---
 
-# 🏅 Prizes
+# 🏅 Prizes (Total Value: $4,000+)
 
-**1st Place** 🥇
-* Credits for runpod, cursor, n8n, elevenlabs
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
 
-**2nd Place** 🥈
-* Credits for runpod, cursor
+<div>
 
-**3rd Place** 🥉
-* Credits for runpod, cursor
+**🥇 1st Place**
+Credits for Runpod, Cursor, n8n, ElevenLabs
 
-**Special Category Awards**
-* Elevenlabs scale subscription 
-* n8n 1 year subscription 
+**🥈 2nd Place**
+Credits for Runpod, Cursor
+
+**🥉 3rd Place**
+Credits for Runpod, Cursor
+
+</div>
+
+<div>
+
+**🎯 Special Category Awards**
+ElevenLabs Scale subscription
+
+</div>
+
+</div> 
 
 ---
 
@@ -140,10 +181,12 @@ Teams will be judged on a scale of 1-10 for each category:
 
 ![bg left:60%](public/logos/cursorhack2.png)
 
-<div style="text-align: center; margin-top: 100px;">
+<div style="text-align: center; margin-top: 80px;">
 
 ### Scan to Check In
 
-![h:450](qrcodes/qrcode_stuttgarthack.netlify.app.png)
+![h:350](qrcodes/qrcode_stuttgarthack.netlify.app.png)
+
+**📶 WiFi:** CREATORS / **Password:** Creators
 
 </div>

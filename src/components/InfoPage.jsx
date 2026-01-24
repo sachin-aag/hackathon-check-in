@@ -340,6 +340,10 @@ function InfoPage() {
               <span className="meta-icon">👥</span>
               <span>Teams of 2-4 people</span>
             </div>
+            <div className="meta-item wifi-info">
+              <span className="meta-icon">📶</span>
+              <span><strong>WiFi:</strong> CREATORS / <strong>Password:</strong> Creators</span>
+            </div>
           </div>
           <CountdownTimer />
           <Link to="/checkin" className="cta-button">
@@ -577,8 +581,10 @@ function InfoPage() {
                 <img src="/logos/runpod_logo.svg" alt="Runpod" className="credit-info-logo" />
                 <h3>Runpod</h3>
               </div>
-              <p>Join Discord and visit the <strong>#runpod</strong> channel to request GPU credits or ask questions.</p>
-              <p className="credit-info-helper">Tim Pietrusky from RunPod will be available remotely on Discord!</p>
+              <p>Get <strong>$25 free GPU credits</strong> by entering your Runpod email address.</p>
+              <div className="credit-info-links">
+                <a href="https://credits.getrunpod.io/redeem/cursor-hackathon-stuttgart-jan-2026" target="_blank" rel="noopener noreferrer">Redeem Credits</a>
+              </div>
             </div>
 
             {/* ElevenLabs */}

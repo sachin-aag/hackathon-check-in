@@ -61,12 +61,19 @@ exports.handler = async (event) => {
     
     const normalizedEmail = normalizeEmail(email);
     
-    // Find row with matching email
-    const participantRow = rows.find(row => 
-      normalizeEmail(row.get('email') || '') === normalizedEmail
-    );
+    // Log available headers for debugging
+    const headerValues = sheet.headerValues;
+    console.log('Available columns:', headerValues);
+    
+    // Find row with matching email (check multiple possible email column names)
+    const participantRow = rows.find(row => {
+      const rowEmail = row.get('email') || row.get('Email') || row.get('EMAIL') || '';
+      return normalizeEmail(rowEmail) === normalizedEmail;
+    });
     
     if (!participantRow) {
+      console.log('No row found for email:', normalizedEmail);
+      console.log('Sample emails in sheet:', rows.slice(0, 5).map(r => r.get('email') || r.get('Email') || 'N/A'));
       return {
         statusCode: 200,
         headers,
@@ -77,8 +84,23 @@ exports.handler = async (event) => {
       };
     }
     
-    const approvalStatus = (participantRow.get('approval_status') || '').toLowerCase();
+    // Check multiple possible column names for approval status
+    const rawApprovalStatus = 
+      participantRow.get('approval_status') || 
+      participantRow.get('Approval Status') ||
+      participantRow.get('approval') ||
+      participantRow.get('Approval') ||
+      participantRow.get('status') ||
+      participantRow.get('Status') ||
+      '';
+    
+    console.log('Raw approval status value:', JSON.stringify(rawApprovalStatus));
+    console.log('All row data:', participantRow._rawData);
+    
+    const approvalStatus = rawApprovalStatus.toLowerCase().trim();
     const isApproved = approvalStatus === 'approved';
+    
+    console.log('Normalized approval status:', approvalStatus, 'isApproved:', isApproved);
     
     // Check if they have already completed check-in (has skills or food preference)
     const hasExistingData = participantRow.get('checked_in_at') || 
