@@ -386,6 +386,7 @@ function FeedbackPage() {
                 placeholder="https://your-project.com"
                 disabled={submitting}
               />
+              <p className="helper-text">If you haven't shipped yet, ship your project and share a link!</p>
               {errors.projectLink && <p className="error-message">{errors.projectLink}</p>}
             </div>
 
