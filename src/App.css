@@ -1733,7 +1733,9 @@ a.sponsor-card {
 }
 
 .judge-form input[type="text"],
+.judge-form input[type="email"],
 .judge-form input[type="password"],
+.judge-form input[type="url"],
 .judge-form textarea {
   padding: 0.875rem 1rem;
   background: rgba(255, 255, 255, 0.05);
@@ -4681,6 +4683,69 @@ a.sponsor-card {
 
   .entrance-image {
     border-radius: 12px;
+  }
+}
+
+/* ==================== CHECK-IN TIME GATE STYLES ==================== */
+
+/* ==================== RATING RADIO BUTTONS ==================== */
+
+.rating-radio-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.rating-radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.rating-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rating-radio .rating-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #94a3b8;
+  transition: all 0.2s ease;
+}
+
+.rating-radio:hover .rating-value {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: #a5b4fc;
+}
+
+.rating-radio.selected .rating-value {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-color: #6366f1;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+@media (max-width: 480px) {
+  .rating-radio-group {
+    gap: 0.375rem;
+  }
+
+  .rating-radio .rating-value {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
   }
 }
 

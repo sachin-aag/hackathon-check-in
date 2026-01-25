@@ -8,6 +8,7 @@ import VotePage from './components/VotePage';
 import FinalRankingsPage from './components/FinalRankingsPage';
 import CreditsPage from './components/CreditsPage';
 import GettingTherePage from './components/GettingTherePage';
+import FeedbackPage from './components/FeedbackPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/final-rankings" element={<FinalRankingsPage />} />
         <Route path="/credits" element={<CreditsPage />} />
         <Route path="/getting-there" element={<GettingTherePage />} />
+        <Route path="/feedback" element={<FeedbackPage />} />
       </Routes>
     </BrowserRouter>
   );

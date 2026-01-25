@@ -376,3 +376,32 @@ export async function getFinalRankings() {
     throw new Error('Failed to load final rankings. Please try again.');
   }
 }
+
+// ==================== FEEDBACK FUNCTIONS ====================
+
+/**
+ * Save post-event feedback
+ * @param {object} feedbackData - The feedback form data
+ * @returns {Promise<{success: boolean, timestamp: string}>}
+ */
+export async function saveFeedback(feedbackData) {
+  try {
+    const response = await fetch(`${API_BASE}/save-feedback`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(feedbackData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to save feedback');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error saving feedback:', error);
+    throw new Error('Failed to submit feedback. Please try again.');
+  }
+}
