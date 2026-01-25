@@ -191,6 +191,18 @@ function FeedbackPage() {
               Your feedback helps us make future events even better!
             </p>
 
+            <p style={{ color: '#a5b4fc', marginTop: '1.5rem' }}>
+              Please add your photos here:{' '}
+              <a 
+                href="https://photos.app.goo.gl/Uuzf4gQ2AS3i8N1P9" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ color: '#818cf8', textDecoration: 'underline' }}
+              >
+                Google Photos Album
+              </a>
+            </p>
+
             {/* Upcoming Event Promo */}
             <div style={{
               marginTop: '2rem',
