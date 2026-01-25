@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { saveFeedback } from '../services/sheetsService';
 
@@ -58,6 +58,11 @@ function FeedbackPage() {
   
   // Success state
   const [submitted, setSubmitted] = useState(false);
+
+  // Set page title
+  useEffect(() => {
+    document.title = 'Cursor Hackathon Stuttgart - Feedback';
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
