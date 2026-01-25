@@ -190,8 +190,39 @@ function FeedbackPage() {
               We really appreciate you taking the time to share your thoughts. 
               Your feedback helps us make future events even better!
             </p>
-            <div className="button-group" style={{ marginTop: '2rem' }}>
-              <Link to="/" className="button button-primary">
+
+            {/* Upcoming Event Promo */}
+            <div style={{
+              marginTop: '2rem',
+              padding: '1.5rem',
+              background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1))',
+              border: '1px solid rgba(99, 102, 241, 0.4)',
+              borderRadius: '12px',
+              width: '100%',
+              maxWidth: '400px'
+            }}>
+              <p style={{ color: '#a5b4fc', fontSize: '0.875rem', marginBottom: '0.5rem' }}>
+                Join us next!
+              </p>
+              <h3 style={{ color: '#ffffff', fontSize: '1.125rem', marginBottom: '0.5rem' }}>
+                v0 Prompt to Production - Stuttgart
+              </h3>
+              <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '1rem' }}>
+                Feb 3rd - Mini builder sprint sponsored by v0
+              </p>
+              <a 
+                href="https://luma.com/aic-st-2-3-v0" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="button button-primary"
+                style={{ display: 'inline-block', fontSize: '0.9rem', padding: '0.75rem 1.25rem' }}
+              >
+                Register Now
+              </a>
+            </div>
+
+            <div className="button-group" style={{ marginTop: '1.5rem' }}>
+              <Link to="/" className="button button-secondary">
                 Back to Home
               </Link>
             </div>
