@@ -32,7 +32,7 @@ function FeedbackPage() {
   const [formData, setFormData] = useState({
     email: '',
     name: '',
-    overallScore: 3,
+    overallScore: 5,
     venueScore: 3,
     wifiScore: 3,
     foodScore: 3,
@@ -42,6 +42,7 @@ function FeedbackPage() {
     durationFeedback: '',
     githubRepo: '',
     projectLink: '',
+    videoLink: '',
     sponsorsUsed: [],
     feedbackTools: '',
     futureSponsors: '',
@@ -119,6 +120,14 @@ function FeedbackPage() {
       }
     }
 
+    if (formData.videoLink.trim()) {
+      try {
+        new URL(formData.videoLink);
+      } catch {
+        newErrors.videoLink = 'Please enter a valid URL';
+      }
+    }
+
     return newErrors;
   };
 
@@ -148,6 +157,7 @@ function FeedbackPage() {
         duration_feedback: formData.durationFeedback,
         github_repo: formData.githubRepo.trim(),
         project_link: formData.projectLink.trim(),
+        video_link: formData.videoLink.trim(),
         sponsor_list: formData.sponsorsUsed.join(', '),
         feedback_tools: formData.feedbackTools.trim(),
         future_sponsors: formData.futureSponsors.trim(),
@@ -321,11 +331,11 @@ function FeedbackPage() {
               <label>
                 What did you think of the duration? <span className="required">*</span>
               </label>
-              <div className="team-options" style={{ marginTop: '0.5rem' }}>
+              <div className="radio-options-list">
                 {durationOptions.map(option => (
                   <label 
                     key={option.value}
-                    className={`team-option ${formData.durationFeedback === option.value ? 'selected' : ''}`}
+                    className={`radio-option-item ${formData.durationFeedback === option.value ? 'selected' : ''}`}
                   >
                     <input
                       type="radio"
@@ -335,14 +345,8 @@ function FeedbackPage() {
                       onChange={handleInputChange}
                       disabled={submitting}
                     />
-                    <div className="team-option-content">
-                      <div className="team-info">
-                        <span className="team-name">{option.label}</span>
-                      </div>
-                      <div className="team-check">
-                        {formData.durationFeedback === option.value && <span>✓</span>}
-                      </div>
-                    </div>
+                    <span className="radio-circle"></span>
+                    <span className="radio-label">{option.label}</span>
                   </label>
                 ))}
               </div>
@@ -378,6 +382,22 @@ function FeedbackPage() {
                 disabled={submitting}
               />
               {errors.projectLink && <p className="error-message">{errors.projectLink}</p>}
+            </div>
+
+            {/* Video Link */}
+            <div className="form-group">
+              <label htmlFor="videoLink">Share a video of your project</label>
+              <input
+                type="url"
+                id="videoLink"
+                name="videoLink"
+                value={formData.videoLink}
+                onChange={handleInputChange}
+                placeholder="https://youtube.com/watch?v=... or https://loom.com/..."
+                disabled={submitting}
+              />
+              <p className="helper-text">YouTube, Loom, or any video link showcasing your project</p>
+              {errors.videoLink && <p className="error-message">{errors.videoLink}</p>}
             </div>
 
             {/* Sponsors Used */}

@@ -81,6 +81,7 @@ exports.handler = async (event) => {
       duration_feedback: feedbackData.duration_feedback || '',
       github_repo: feedbackData.github_repo || '',
       project_link: feedbackData.project_link || '',
+      video_link: feedbackData.video_link || '',
       sponsor_list: feedbackData.sponsor_list || '',
       feedback_tools: feedbackData.feedback_tools || '',
       future_sponsors: feedbackData.future_sponsors || '',
