@@ -486,7 +486,7 @@ function FeedbackPage() {
 
             {/* Additional Comments */}
             <div className="form-group">
-              <label htmlFor="comments">Any other feedback you want to add?</label>
+              <label htmlFor="comments">Anything else you want to say? This could be future events you want to see, or anything that you want us to keep doing. </label>
               <textarea
                 id="comments"
                 name="comments"
