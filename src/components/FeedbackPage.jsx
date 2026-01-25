@@ -68,9 +68,9 @@ function FeedbackPage() {
     }
   };
 
-  const handleScoreChange = (field, value) => {
+  const handleScoreChange = (field, value, maxValue = 5) => {
     const numValue = parseInt(value, 10);
-    if (!isNaN(numValue) && numValue >= 1 && numValue <= 5) {
+    if (!isNaN(numValue) && numValue >= 1 && numValue <= maxValue) {
       setFormData(prev => ({ ...prev, [field]: numValue }));
     }
   };
@@ -244,22 +244,22 @@ function FeedbackPage() {
             <div className="criteria-section">
               <div className="criteria-header">
                 <h3>Overall Event Rating</h3>
-                <span className="scale-hint">1-5 (5 = best)</span>
+                <span className="scale-hint">1-10 (10 = best)</span>
               </div>
               
               <div className="criterion-row">
                 <div className="criterion-info">
                   <label>How would you rate the event overall?</label>
                 </div>
-                <div className="rating-radio-group">
-                  {[1, 2, 3, 4, 5].map(value => (
+                <div className="rating-radio-group rating-radio-group-10">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => (
                     <label key={value} className={`rating-radio ${formData.overallScore === value ? 'selected' : ''}`}>
                       <input
                         type="radio"
                         name="overallScore"
                         value={value}
                         checked={formData.overallScore === value}
-                        onChange={(e) => handleScoreChange('overallScore', e.target.value)}
+                        onChange={(e) => handleScoreChange('overallScore', e.target.value, 10)}
                         disabled={submitting}
                       />
                       <span className="rating-value">{value}</span>
